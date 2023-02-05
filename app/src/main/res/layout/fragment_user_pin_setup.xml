@@ -160,7 +160,7 @@
             android:id="@+id/tv_enterOtpText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enter Your OTP send to your E=mail"
+            android:text="@string/enterOtpText"
             android:textColor="@color/black"
             android:layout_below="@id/et_reEnterPinDigit1"
             android:layout_alignStart="@id/tv_newPinText"

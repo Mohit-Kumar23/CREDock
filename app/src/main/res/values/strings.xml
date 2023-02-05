@@ -19,6 +19,7 @@
     <string name="next">NEXT</string>
     <string name="enter_your_new_pin">Enter Your New PIN</string>
     <string name="re_enter_your_pin">Re-Enter Your PIN</string>
+    <string name="enterOtpText">Enter Your OTP send to your Email</string>
     <string-array name="gender_array">
         <item>Gender</item>
         <item>Male</item>
@@ -38,7 +39,7 @@
     <string-array name="security_question_array">
         <item>Select your Security Question</item>
         <item>What is your childhood friend name?</item>
-        <item>What is your favourite hobby?></item>
+        <item>What is your favourite hobby?</item>
         <item>What is your favourite subject to study?</item>
         <item>What is name of your high school?</item>
     </string-array>

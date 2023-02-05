@@ -87,7 +87,7 @@
             android:id="@+id/fragment_userDetials"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:layout="@layout/fragment_user_profile_detials"/>
+            tools:layout="@layout/fragment_user_profile_details"/>
 
       <Button
             android:id="@+id/btn_next"
