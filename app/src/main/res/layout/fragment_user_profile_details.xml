@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/fragment_userProfileDetails"
+    tools:context=".View.UserProfileDetails">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:id="@+id/relLayout_userProfileDetails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/et_userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/custom_input_view"
+            android:padding="10dp"
+            android:hint="@string/userName"
+            tools:ignore="RtlSymmetry"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:scrollbars="horizontal"
+            android:scrollIndicators="none"/>
+
+        <EditText
+            android:id="@+id/et_userEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_userName"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"
+            android:hint="@string/userEmail"
+            android:background="@drawable/custom_input_view"
+            android:padding="10dp"
+            android:textColorHint="@color/grey"
+            android:textColor="@color/black"
+            android:scrollbars="horizontal"
+            android:scrollIndicators="none"/>
+
+        <EditText
+            android:id="@+id/et_userAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_userEmail"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/custom_input_view"
+            android:padding="10dp"
+            android:hint="@string/userAge"/>
+
+        <Spinner
+            android:id="@+id/sp_userGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_userEmail"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_alignEnd="@id/et_userEmail"
+            android:layout_alignBottom="@id/et_userAge"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@id/et_userAge"
+            android:background="@drawable/custom_input_view"
+            android:padding="10dp"
+            android:entries="@array/gender_array"
+            tools:ignore="RtlSymmetry" />
+
+        <Spinner
+            android:id="@+id/sp_userDesignation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_userAge"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/custom_input_view"
+            android:padding="15dp"
+            android:hint="@string/userDesignation"
+            android:textColorHint="@color/grey"
+            android:textColor="@color/black"
+            android:entries="@array/designation_array"
+            tools:ignore="RtlSymmetry"/>
+
+        <Spinner
+            android:id="@+id/sp_userSecurityQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sp_userDesignation"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"
+            android:padding="15dp"
+            android:entries="@array/security_question_array"
+            android:background="@drawable/custom_input_view" />
+
+        <EditText
+            android:id="@+id/et_userSecurityAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sp_userSecurityQuestion"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:padding="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/custom_input_view"
+            android:hint="@string/user_security_answer"
+            android:textColorHint="@color/grey"
+            android:textColor="@color/black"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

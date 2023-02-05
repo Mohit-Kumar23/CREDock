@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background = "@drawable/bg_splash"
+    tools:context=".SplashActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id = "@+id/vGuideLine1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vGuideLine2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vGuideLine3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.20"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vGuideLine4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hGuideLine1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hGuideLine2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.65"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hGuideLine3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.71" />
+
+    <ImageView
+        android:id="@+id/iv_credockLogo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/hGuideLine1"
+        app:layout_constraintBottom_toBottomOf="@id/hGuideLine2"
+        app:layout_constraintStart_toStartOf="@id/vGuideLine1"
+        app:layout_constraintEnd_toEndOf="@id/vGuideLine2"
+        android:src="@drawable/credock_logo"
+        android:contentDescription="@string/display_logo"/>
+
+    <TextView
+        android:id="@+id/tv_credockName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/app_name"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:fontFamily="@font/koho_semibold"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/hGuideLine3"
+        app:layout_constraintEnd_toStartOf="@+id/vGuideLine2"
+        app:layout_constraintStart_toStartOf="@+id/vGuideLine1"
+        app:layout_constraintTop_toTopOf="@+id/hGuideLine2" />
+
+    <TextView
+        android:id="@+id/tv_credock_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/credock_desc"
+        android:fontFamily="@font/koho_semibold"
+        android:textColor="@color/grey"
+        app:layout_constraintEnd_toStartOf="@+id/vGuideLine4"
+        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="@+id/vGuideLine3"
+        app:layout_constraintTop_toTopOf="@+id/hGuideLine3" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

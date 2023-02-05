@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_userPinDetails"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".View.UserPinSetup">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:id="@+id/relLayout_userPinSetup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <TextView
+            android:id="@+id/tv_newPinText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/enter_your_new_pin"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"/>
+
+        <EditText
+            android:id="@+id/et_newPinDigit1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_newPinText"
+            android:layout_marginTop="20dp"
+            android:inputType="number"
+            android:nextFocusRight="@id/et_newPinDigit2"
+            android:layout_alignStart="@id/tv_newPinText"
+            android:background="@drawable/custom_input_view"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="0"
+            android:textSize="45sp"/>
+
+        <EditText
+            android:id="@+id/et_newPinDigit2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_newPinText"
+            android:layout_toEndOf="@id/et_newPinDigit1"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="5dp"
+            android:inputType="number"
+            android:nextFocusRight="@id/et_newPinDigit3"
+            android:background="@drawable/custom_input_view"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="0"
+            android:textSize="45sp"/>
+
+        <EditText
+            android:id="@+id/et_newPinDigit3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_newPinText"
+            android:layout_toEndOf="@id/et_newPinDigit2"
+            android:layout_marginTop="20dp"
+            android:inputType="number"
+            android:nextFocusRight="@id/et_newPinDigit4"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/custom_input_view"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="0"
+            android:textSize="45sp"/>
+
+        <EditText
+            android:id="@+id/et_newPinDigit4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_newPinText"
+            android:layout_toEndOf="@id/et_newPinDigit3"
+            android:layout_marginTop="20dp"
+            android:inputType="number"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/custom_input_view"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="0"
+            android:textSize="45sp"/>
+
+
+        <TextView
+            android:id="@+id/tv_reEnterPinText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/re_enter_your_pin"
+            android:textColor="@color/black"
+            android:layout_below="@id/et_newPinDigit1"
+            android:layout_alignStart="@id/tv_newPinText"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:id="@+id/et_reEnterPinDigit1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_reEnterPinText"
+            android:layout_marginTop="20dp"
+            android:layout_alignStart="@id/tv_newPinText"
+            android:inputType="number"
+            android:nextFocusRight="@id/et_reEnterPinDigit2"
+            android:background="@drawable/custom_input_view"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="0"
+            android:textSize="45sp"/>
+
+        <EditText
+            android:id="@+id/et_reEnterPinDigit2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_reEnterPinText"
+            android:layout_toEndOf="@id/et_reEnterPinDigit1"
+            android:layout_marginTop="20dp"
+            android:inputType="number"
+            android:nextFocusRight="@id/et_reEnterPinDigit3"
+            android:layout_alignStart="@id/et_newPinDigit2"
+            android:background="@drawable/custom_input_view"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="0"
+            android:textSize="45sp"/>
+
+        <EditText
+            android:id="@+id/et_reEnterPinDigit3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_reEnterPinText"
+            android:layout_toEndOf="@id/et_reEnterPinDigit2"
+            android:layout_marginTop="20dp"
+            android:inputType="number"
+            android:nextFocusRight="@id/et_reEnterPinDigit4"
+            android:layout_alignStart="@id/et_newPinDigit3"
+            android:background="@drawable/custom_input_view"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="0"
+            android:textSize="45sp"/>
+
+        <EditText
+            android:id="@+id/et_reEnterPinDigit4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_reEnterPinText"
+            android:layout_toEndOf="@id/et_reEnterPinDigit3"
+            android:layout_marginTop="20dp"
+            android:layout_alignStart="@id/et_newPinDigit4"
+            android:background="@drawable/custom_input_view"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="0"
+            android:textSize="45sp"/>
+
+        <TextView
+            android:id="@+id/tv_enterOtpText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter Your OTP send to your E=mail"
+            android:textColor="@color/black"
+            android:layout_below="@id/et_reEnterPinDigit1"
+            android:layout_alignStart="@id/tv_newPinText"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:id="@+id/et_otpDigit1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_enterOtpText"
+            android:layout_marginTop="20dp"
+            android:inputType="number"
+            android:nextFocusRight="@id/et_otpDigit2"
+            android:layout_alignStart="@id/et_reEnterPinDigit1"
+            android:background="@drawable/custom_input_view"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="0"
+            android:textSize="45sp"/>
+
+        <EditText
+            android:id="@+id/et_otpDigit2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_enterOtpText"
+            android:layout_toEndOf="@id/et_otpDigit1"
+            android:layout_marginTop="20dp"
+            android:inputType="number"
+            android:nextFocusRight="@id/et_otpDigit3"
+            android:layout_alignStart="@id/et_reEnterPinDigit2"
+            android:background="@drawable/custom_input_view"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="0"
+            android:textSize="45sp"/>
+
+        <EditText
+            android:id="@+id/et_otpDigit3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_enterOtpText"
+            android:layout_toEndOf="@id/et_otpDigit2"
+            android:layout_marginTop="20dp"
+            android:inputType="number"
+            android:nextFocusRight="@id/et_otpDigit4"
+            android:layout_alignStart="@id/et_reEnterPinDigit3"
+            android:background="@drawable/custom_input_view"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="0"
+            android:textSize="45sp"/>
+
+        <EditText
+            android:id="@+id/et_otpDigit4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_enterOtpText"
+            android:layout_toEndOf="@id/et_otpDigit3"
+            android:layout_marginTop="20dp"
+            android:layout_alignStart="@id/et_reEnterPinDigit4"
+            android:background="@drawable/custom_input_view"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="0"
+            android:textSize="45sp"/>
+    </RelativeLayout>
+
+</FrameLayout>

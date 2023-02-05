@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_auth"
+    tools:context=".View.AuthActivity">
+
+    <Button
+        android:id="@+id/btn_pinSubmit"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/Submit"
+        android:textSize="20sp"
+        android:fontFamily="@font/koho_semibold"
+        android:background="@drawable/custom_btn_design"
+        app:layout_constraintBottom_toTopOf="@id/hGuideLine4"
+        app:layout_constraintEnd_toStartOf="@id/vGuideLine4"
+        app:layout_constraintStart_toEndOf="@id/vGuideLine3"
+        app:layout_constraintTop_toBottomOf="@id/hGuideLine3" />
+
+    <TextView
+        android:id="@+id/tv_enterPinText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/Enter_Pin"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="35sp"
+        android:fontFamily="@font/koho_semibold"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/hGuideLine2"
+        app:layout_constraintEnd_toStartOf="@id/vGuideLine2"
+        app:layout_constraintStart_toEndOf="@id/vGuideLine1"
+        app:layout_constraintTop_toBottomOf="@id/hGuideLine1" />
+
+    <EditText
+        android:id="@+id/et_pinDigit1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:textSize="70sp"
+        android:gravity="bottom|center_horizontal"
+        android:inputType="number"
+        android:nextFocusRight="@id/et_pinDigit2"
+        android:background="@drawable/custom_pindesign_et"
+        app:layout_constraintTop_toBottomOf="@id/hGuideLine5"
+        app:layout_constraintBottom_toTopOf="@id/hGuideLine6"
+        app:layout_constraintStart_toEndOf="@id/vGuideLine1"
+        app:layout_constraintEnd_toStartOf="@id/vGuideLine3"/>
+
+    <EditText
+        android:id="@+id/et_pinDigit2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:textSize="70sp"
+        android:gravity="bottom|center_horizontal"
+        android:inputType="number"
+        android:nextFocusRight="@id/et_pinDigit3"
+        android:background="@drawable/custom_pindesign_et"
+        app:layout_constraintTop_toBottomOf="@id/hGuideLine5"
+        app:layout_constraintBottom_toTopOf="@id/hGuideLine6"
+        app:layout_constraintStart_toEndOf="@id/vGuideLine3"
+        app:layout_constraintEnd_toStartOf="@id/vGuideLine5"/>
+
+    <EditText
+        android:id="@+id/et_pinDigit3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:textSize="70sp"
+        android:gravity="bottom|center_horizontal"
+        android:inputType="number"
+        android:nextFocusRight="@id/et_pinDigit4"
+        android:background="@drawable/custom_pindesign_et"
+        app:layout_constraintTop_toBottomOf="@id/hGuideLine5"
+        app:layout_constraintBottom_toTopOf="@id/hGuideLine6"
+        app:layout_constraintStart_toEndOf="@id/vGuideLine5"
+        app:layout_constraintEnd_toStartOf="@id/vGuideLine4"/>
+
+    <EditText
+        android:id="@+id/et_pinDigit4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:textSize="70sp"
+        android:gravity="bottom|center_horizontal"
+        android:inputType="number"
+        android:background="@drawable/custom_pindesign_et"
+        app:layout_constraintTop_toBottomOf="@id/hGuideLine5"
+        app:layout_constraintBottom_toTopOf="@id/hGuideLine6"
+        app:layout_constraintStart_toEndOf="@id/vGuideLine4"
+        app:layout_constraintEnd_toStartOf="@id/vGuideLine2"/>
+
+    <TextView
+        android:id="@+id/tv_dont_accnt_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/don_t_have_credock_account_desc"
+        android:gravity="center"
+        android:fontFamily="@font/koho_semibold"
+        android:textColor="@color/grey"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/vGuideLine2"
+        app:layout_constraintStart_toEndOf="@id/vGuideLine1"
+        app:layout_constraintTop_toBottomOf="@id/hGuideLine7"/>
+
+    <TextView
+        android:id="@+id/tv_create_accnt_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_account_here_link"
+        android:textColor="@color/dark_blue"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:linksClickable="true"
+        app:layout_constraintBottom_toTopOf="@id/hGuideLine8"
+        app:layout_constraintEnd_toStartOf="@+id/vGuideLine2"
+        app:layout_constraintStart_toEndOf="@id/vGuideLine1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hGuideLine1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hGuideLine2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.18" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hGuideLine3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.42" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hGuideLine4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vGuideLine1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@id/vGuideLine2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vGuideLine3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.30" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vGuideLine4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.70" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hGuideLine5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.23" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hGuideLine6"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.37" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vGuideLine5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hGuideLine7"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hGuideLine8"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.87"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

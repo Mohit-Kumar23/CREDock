@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">CREDock</string>
+    <string name="credock_desc">Keep your Credentials and Documents Safe and Secure with CREDock</string>
+    <string name="display_logo">Display Logo</string>
+    <string name="Hint_digit">_</string>
+    <string name="Enter_Pin">Enter Your Pin</string>
+    <string name="Submit">SUBMIT</string>
+    <string name="don_t_have_credock_account_desc">Don\'t have CREDock Account</string>
+    <string name="create_account_here_link">Create Account Here</string>
+    <string name="userName">Name</string>
+    <string name="userEmail">Email</string>
+    <string name="userAge">Age</string>
+    <string name="userDesignation">Designation</string>
+    <string name="userGender">Gender</string>
+    <string name="userSecurityQuestion">Security Question</string>
+    <string name="user_security_answer">Write your Security Answer</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="previous">PREVIOUS</string>
+    <string name="next">NEXT</string>
+    <string name="enter_your_new_pin">Enter Your New PIN</string>
+    <string name="re_enter_your_pin">Re-Enter Your PIN</string>
+    <string-array name="gender_array">
+        <item>Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="designation_array">
+        <item>Designation</item>
+        <item>Student</item>
+        <item>Professional</item>
+        <item>Defence</item>
+        <item>Business</item>
+        <item>Home-maker</item>
+        <item>Freelancer</item>
+        <item>Govt. Employee</item>
+    </string-array>
+    <string-array name="security_question_array">
+        <item>Select your Security Question</item>
+        <item>What is your childhood friend name?</item>
+        <item>What is your favourite hobby?></item>
+        <item>What is your favourite subject to study?</item>
+        <item>What is name of your high school?</item>
+    </string-array>
+</resources>
