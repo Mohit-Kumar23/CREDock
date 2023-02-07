@@ -17,24 +17,26 @@
             android:layout_height="wrap_content"
             android:text="@string/enter_your_new_pin"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="15dp"/>
+            android:textSize="@dimen/_16ssp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_15sdp"/>
 
         <EditText
             android:id="@+id/et_newPinDigit1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_newPinText"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:inputType="number"
+            android:maxLines="1"
+            android:maxLength="1"
             android:nextFocusRight="@id/et_newPinDigit2"
             android:layout_alignStart="@id/tv_newPinText"
             android:background="@drawable/custom_input_view"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="0"
-            android:textSize="45sp"/>
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:hint="X"
+           android:textSize="@dimen/_20ssp"/>
 
         <EditText
             android:id="@+id/et_newPinDigit2"
@@ -42,15 +44,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_newPinText"
             android:layout_toEndOf="@id/et_newPinDigit1"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_5sdp"
             android:inputType="number"
+            android:maxLines="1"
+            android:maxLength="1"
             android:nextFocusRight="@id/et_newPinDigit3"
             android:background="@drawable/custom_input_view"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="0"
-            android:textSize="45sp"/>
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:hint="X"
+           android:textSize="@dimen/_20ssp"/>
 
         <EditText
             android:id="@+id/et_newPinDigit3"
@@ -58,15 +62,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_newPinText"
             android:layout_toEndOf="@id/et_newPinDigit2"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:inputType="number"
+            android:maxLines="1"
+            android:maxLength="1"
             android:nextFocusRight="@id/et_newPinDigit4"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="@dimen/_5sdp"
             android:background="@drawable/custom_input_view"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="0"
-            android:textSize="45sp"/>
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:hint="X"
+           android:textSize="@dimen/_20ssp"/>
 
         <EditText
             android:id="@+id/et_newPinDigit4"
@@ -74,14 +80,16 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_newPinText"
             android:layout_toEndOf="@id/et_newPinDigit3"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:inputType="number"
-            android:layout_marginStart="5dp"
+            android:maxLines="1"
+            android:maxLength="1"
+            android:layout_marginStart="@dimen/_5sdp"
             android:background="@drawable/custom_input_view"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="0"
-            android:textSize="45sp"/>
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:hint="X"
+           android:textSize="@dimen/_20ssp"/>
 
 
         <TextView
@@ -92,23 +100,25 @@
             android:textColor="@color/black"
             android:layout_below="@id/et_newPinDigit1"
             android:layout_alignStart="@id/tv_newPinText"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp" />
+            android:textSize="@dimen/_16ssp"
+            android:layout_marginTop="@dimen/_20sdp" />
 
         <EditText
             android:id="@+id/et_reEnterPinDigit1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_reEnterPinText"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_alignStart="@id/tv_newPinText"
             android:inputType="number"
+            android:maxLines="1"
+            android:maxLength="1"
             android:nextFocusRight="@id/et_reEnterPinDigit2"
             android:background="@drawable/custom_input_view"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="0"
-            android:textSize="45sp"/>
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:hint="X"
+           android:textSize="@dimen/_20ssp"/>
 
         <EditText
             android:id="@+id/et_reEnterPinDigit2"
@@ -116,15 +126,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_reEnterPinText"
             android:layout_toEndOf="@id/et_reEnterPinDigit1"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:inputType="number"
+            android:maxLines="1"
+            android:maxLength="1"
             android:nextFocusRight="@id/et_reEnterPinDigit3"
             android:layout_alignStart="@id/et_newPinDigit2"
             android:background="@drawable/custom_input_view"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="0"
-            android:textSize="45sp"/>
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:hint="X"
+           android:textSize="@dimen/_20ssp"/>
 
         <EditText
             android:id="@+id/et_reEnterPinDigit3"
@@ -132,15 +144,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_reEnterPinText"
             android:layout_toEndOf="@id/et_reEnterPinDigit2"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:inputType="number"
+            android:maxLines="1"
+            android:maxLength="1"
             android:nextFocusRight="@id/et_reEnterPinDigit4"
             android:layout_alignStart="@id/et_newPinDigit3"
             android:background="@drawable/custom_input_view"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="0"
-            android:textSize="45sp"/>
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:hint="X"
+           android:textSize="@dimen/_20ssp"/>
 
         <EditText
             android:id="@+id/et_reEnterPinDigit4"
@@ -148,13 +162,15 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_reEnterPinText"
             android:layout_toEndOf="@id/et_reEnterPinDigit3"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:maxLines="1"
+            android:maxLength="1"
             android:layout_alignStart="@id/et_newPinDigit4"
             android:background="@drawable/custom_input_view"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="0"
-            android:textSize="45sp"/>
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:hint="X"
+           android:textSize="@dimen/_20ssp"/>
 
         <TextView
             android:id="@+id/tv_enterOtpText"
@@ -164,23 +180,25 @@
             android:textColor="@color/black"
             android:layout_below="@id/et_reEnterPinDigit1"
             android:layout_alignStart="@id/tv_newPinText"
-            android:textSize="18sp"
-            android:layout_marginTop="20dp" />
+            android:textSize="@dimen/_14ssp"
+            android:layout_marginTop="@dimen/_20sdp" />
 
         <EditText
             android:id="@+id/et_otpDigit1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_enterOtpText"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:inputType="number"
+            android:maxLines="1"
+            android:maxLength="1"
             android:nextFocusRight="@id/et_otpDigit2"
             android:layout_alignStart="@id/et_reEnterPinDigit1"
             android:background="@drawable/custom_input_view"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="0"
-            android:textSize="45sp"/>
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:hint="X"
+           android:textSize="@dimen/_20ssp"/>
 
         <EditText
             android:id="@+id/et_otpDigit2"
@@ -188,15 +206,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_enterOtpText"
             android:layout_toEndOf="@id/et_otpDigit1"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:inputType="number"
+            android:maxLines="1"
+            android:maxLength="1"
             android:nextFocusRight="@id/et_otpDigit3"
             android:layout_alignStart="@id/et_reEnterPinDigit2"
             android:background="@drawable/custom_input_view"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="0"
-            android:textSize="45sp"/>
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:hint="X"
+           android:textSize="@dimen/_20ssp"/>
 
         <EditText
             android:id="@+id/et_otpDigit3"
@@ -204,15 +224,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_enterOtpText"
             android:layout_toEndOf="@id/et_otpDigit2"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:inputType="number"
+            android:maxLines="1"
+            android:maxLength="1"
             android:nextFocusRight="@id/et_otpDigit4"
             android:layout_alignStart="@id/et_reEnterPinDigit3"
             android:background="@drawable/custom_input_view"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="0"
-            android:textSize="45sp"/>
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:hint="X"
+           android:textSize="@dimen/_20ssp"/>
 
         <EditText
             android:id="@+id/et_otpDigit4"
@@ -220,13 +242,15 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_enterOtpText"
             android:layout_toEndOf="@id/et_otpDigit3"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:maxLines="1"
+            android:maxLength="1"
             android:layout_alignStart="@id/et_reEnterPinDigit4"
             android:background="@drawable/custom_input_view"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="0"
-            android:textSize="45sp"/>
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:hint="X"
+           android:textSize="@dimen/_20ssp"/>
     </RelativeLayout>
 
 </FrameLayout>
