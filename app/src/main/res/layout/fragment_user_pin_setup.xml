@@ -165,6 +165,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:maxLines="1"
             android:maxLength="1"
+            android:inputType="number"
             android:layout_alignStart="@id/et_newPinDigit4"
             android:background="@drawable/custom_input_view"
             android:paddingStart="@dimen/_20sdp"
@@ -245,12 +246,24 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:maxLines="1"
             android:maxLength="1"
+            android:inputType="number"
             android:layout_alignStart="@id/et_reEnterPinDigit4"
             android:background="@drawable/custom_input_view"
             android:paddingStart="@dimen/_20sdp"
             android:paddingEnd="@dimen/_20sdp"
             android:hint="X"
            android:textSize="@dimen/_20ssp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_otpDigit4"
+            android:layout_alignEnd="@id/et_otpDigit4"
+            android:text="@string/resend_otp_text"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:textSize="@dimen/_10ssp"
+            android:linksClickable="true"
+            android:textColor="@color/dark_blue" />
     </RelativeLayout>
 
 </FrameLayout>
