@@ -1,12 +1,5 @@
 package co.mohit.credock.View
 
-//import uk.co.jakebreen.sendgridandroid.SendGrid
-//import uk.co.jakebreen.sendgridandroid.SendGrid.create
-//import uk.co.jakebreen.sendgridandroid.SendGridMail
-//import uk.co.jakebreen.sendgridandroid.SendGridResponse
-//import uk.co.jakebreen.sendgridandroid.SendTask
-
-import android.os.AsyncTask
 import android.os.Bundle
 import android.provider.ContactsContract.CommonDataKinds.Email
 import android.se.omapi.Session
@@ -19,17 +12,9 @@ import androidx.fragment.app.Fragment
 import co.mohit.credock.CD_Global_enums
 import co.mohit.credock.Controller.EmailVerificationService
 import co.mohit.credock.R
-import com.sendgrid.*
 import kotlinx.android.synthetic.main.activity_account_create.*
 import kotlinx.android.synthetic.main.activity_auth.*
 import kotlinx.android.synthetic.main.fragment_user_pin_setup.*
-import java.io.IOException
-import java.net.Authenticator
-import java.net.PasswordAuthentication
-import java.util.Properties
-import javax.mail.*
-import javax.mail.internet.InternetAddress
-import javax.mail.internet.MimeMessage
 
 class AccountCreateActivity : AppCompatActivity() {
 
@@ -74,12 +59,6 @@ class AccountCreateActivity : AppCompatActivity() {
 
             emailVerifyService = EmailVerificationService(GetSendGridApiKey().toString(),"kvnl.mohitchanchlani@gmail.com","Mohit Kumar")
             var value = emailVerifyService.sendOTPForEmailVerification()
-            /*if(value == CD_Global_enums.XX_ERROR.value.toInt())
-            {
-                Toast.makeText(this@AccountCreateActivity,"Got into some error",Toast.LENGTH_SHORT).show()
-            }*/
-          /*  var myTask = MyAsyncTask()
-            myTask.execute(GetSendGridApiKey())*/
         })
 
         btn_previous.setOnClickListener(View.OnClickListener {
@@ -95,61 +74,7 @@ class AccountCreateActivity : AppCompatActivity() {
             }
         })
 
-       /* tv_resendOtpText.setOnClickListener(View.OnClickListener {
-            emailVerifyService.sendOTPForEmailVerification()
-        })*/
     }
-
-/*    private fun sendVerificationEmail() {
-        val from = com.sendgrid.Email("mohitkc1234@rediffmail.com")
-        val subject = "Sending with SendGrid is Fun"
-        val to = com.sendgrid.Email("kvnl.mohitchanchlani@gmail.com")
-        val content = Content("text/plain", "and easy to do anywhere, even with Java")
-        val mail = Mail(from, subject, to, content)
-
-        val sg = SendGrid(GetSendGridApiKey().toString())
-        val request = Request()
-        try {
-            request.setMethod(Method.POST)
-            request.setEndpoint("/mail/send")
-            request.setBody(mail.build())
-            val response: Response = sg.api(request)
-            Toast.makeText(this@AccountCreateActivity,response.statusCode.toString(),Toast.LENGTH_LONG).show()
-        } catch (ex: IOException) {
-            Toast.makeText(this@AccountCreateActivity, ex.message.toString(),Toast.LENGTH_LONG).show()
-        }
-    }*/
-
-    //fun sendVerificationEmail() {
-//        val userName:String = "apikey"
-//        val password:String = GetSendGridApiKey()
-//
-//        val props = Properties()
-//        props["mail.smtp.host"] = "smtp.sendgrid.net"
-//        props["mail.smtp.socketFactory.port"] = "465"
-//        props["mail.smtp.socketFactory.class"]= "javax.net.ssl.SSLSocketFactory"
-//        props["mail.smtp.auth"] = "true"
-//        props["mail.smtp.port"] = "465"
-//
-//        val session = javax.mail.Session.getInstance(props, object : javax.mail.Authenticator() {
-//            override fun getPasswordAuthentication(): javax.mail.PasswordAuthentication {
-//                return javax.mail.PasswordAuthentication(userName, password)
-//            }
-//        })
-//
-//        try {
-//            var message = com.sun.mail.smtp.SMTPMessage(session)
-//            message.setFrom(InternetAddress("mohitkc1234@rediffmail.com"))
-//            message.setRecipient(Message.RecipientType.TO,InternetAddress("kvnl.mohitchanchlani@gmail.com"))
-//            message.subject = "Email Verification OTP"
-//            message.setText("Hello, This mail is for Email verification. Your OTP is ${(1000..9999).shuffled().first().toString()}")
-//            com.sun.mail.smtp.SMTPTransport.send(message)
-//        }
-//        catch (ex:Exception)
-//        {
-//            Log.i("Mail Exception",ex.message.toString())
-//        }
-    //}
 
     fun checkAndMatchUserPin(): Int {
         if (str_newPin != null)
@@ -239,45 +164,3 @@ class AccountCreateActivity : AppCompatActivity() {
         return value;
     }
 }
-/*    class MyAsyncTask:AsyncTask<String,Unit,String>()
-    {
-
-        override fun onPostExecute(result: String?) {
-            super.onPostExecute(result)
-        }
-
-        override fun doInBackground(vararg params: String?): String {
-            val userName:String = "apikey"
-            val password:String? = params.get(0)
-
-            val props = Properties()
-            props["mail.smtp.host"] = "smtp.sendgrid.net"//"smtp.gmail.com"
-            props["mail.smtp.socketFactory.port"] = "25"//"587"
-            //props["mail.smtp.starttls.enable"] = "true"
-            props["mail.smtp.socketFactory.class"]= "javax.net.ssl.SSLSocketFactory"
-            props["mail.smtp.auth"] = "true"
-//            props["spring.mail.smtp.ssl.enable"] = "true"
-            props["mail.smtp.port"] = "25"//"587"
-
-            val session = javax.mail.Session.getInstance(props, object : javax.mail.Authenticator() {
-                override fun getPasswordAuthentication(): javax.mail.PasswordAuthentication {
-                    return javax.mail.PasswordAuthentication(userName, password)
-                }
-            })
-
-            try {
-                var message = com.sun.mail.smtp.SMTPMessage(session)
-                message.setFrom(InternetAddress("mohitkc1234@rediffmail.com"))
-                message.setRecipient(Message.RecipientType.TO,InternetAddress("kvnl.mohitchanchlani@gmail.com"))
-                message.subject = "Email Verification OTP"
-                message.setText("Hello, This mail is for Email verification. Your OTP is ${(1000..9999).shuffled().first().toString()}")
-                com.sun.mail.smtp.SMTPTransport.send(message)
-            }
-            catch (ex:Exception)
-            {
-                Log.i("Mail Exception",ex.message.toString())
-            }
-            return "Hello"
-        }
-    }*/
-

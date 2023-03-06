@@ -13,10 +13,19 @@ import kotlin.properties.Delegates
 
 class EmailVerificationService{
 
+    init {
+        System.loadLibrary("api_keys")
+    }
+
+    private external fun GetSenderEmail(): String
+    private external fun GetHostServer():String
+    private external fun GetHostPort():String
+
+
     private val userName:String = "apikey"
     private lateinit var apiKeyAsPassword:String
     private var props: Properties? = null
-    private var senderEmail = "mohitkc1234@rediffmail.com"
+    private var senderEmail = GetSenderEmail()
     private lateinit var recipientEmail:String;
     private lateinit var recipientName: String;
     private var generatedOTP:Int = 0;
@@ -27,6 +36,7 @@ class EmailVerificationService{
         this.recipientEmail = recipientEmail;
         this.recipientName = recipientName;
     }
+
 
     fun sendOTPForEmailVerification():Int
     {
@@ -69,11 +79,11 @@ class EmailVerificationService{
     private fun preparePropertiesForSMTP()
     {
         props = Properties()
-        props!!["mail.smtp.host"] = "smtp.sendgrid.net"
-        props!!["mail.smtp.socketFactory.port"] = "465"
+        props!!["mail.smtp.host"] = GetHostServer()
+        props!!["mail.smtp.socketFactory.port"] = GetHostPort()
         props!!["mail.smtp.socketFactory.class"] = "javax.net.ssl.SSLSocketFactory"
         props!!["mail.smtp.auth"] = "true"
-        props!!["mail.smtp.port"] = "465"
+        props!!["mail.smtp.port"] = GetHostPort()
     }
 
     fun verifyInputOtp(inputOTP:Int):Int
@@ -83,6 +93,5 @@ class EmailVerificationService{
         else
             return CD_Global_enums.XX_ERROR.value.toInt()
     }
-
 
 }
