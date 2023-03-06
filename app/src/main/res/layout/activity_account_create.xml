@@ -83,21 +83,35 @@
         app:layout_constraintStart_toStartOf="@id/vGuideLine3"
         app:layout_constraintTop_toBottomOf="@id/hGuideLine3">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment_userDetials"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout="@layout/fragment_user_pin_setup"/>
+       <androidx.fragment.app.FragmentContainerView
+           android:id="@+id/fragment_userDetials"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           tools:layout="@layout/fragment_user_pin_setup"/>
+
+       <TextView
+           android:id="@+id/tv_resendOtpText"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/fragment_userDetials"
+           android:layout_alignEnd="@id/fragment_userDetials"
+           android:text="@string/resend_otp_text"
+           android:layout_marginTop="@dimen/_8sdp"
+           android:layout_marginEnd="@dimen/_15sdp"
+           android:textSize="@dimen/_10ssp"
+           android:linksClickable="true"
+           android:visibility="gone"
+           android:textColor="@color/dark_blue" />
 
       <Button
             android:id="@+id/btn_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/fragment_userDetials"
+            android:layout_below="@id/tv_resendOtpText"
             android:gravity="center"
             android:layout_alignEnd="@id/fragment_userDetials"
             android:layout_marginEnd="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:visibility="visible"
             android:background="@drawable/custom_btn_design"
             android:text="@string/next" />
@@ -106,9 +120,9 @@
             android:id="@+id/btn_previous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/fragment_userDetials"
+            android:layout_below="@id/tv_resendOtpText"
             android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:background="@drawable/custom_btn_design"
             android:text="@string/previous"
             android:visibility="gone"
@@ -120,10 +134,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_btn_design"
-            android:layout_below="@id/fragment_userDetials"
+            android:layout_below="@id/tv_resendOtpText"
             android:layout_alignEnd="@id/fragment_userDetials"
             android:layout_marginEnd="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:text="@string/Submit"
             android:visibility="gone"
             android:gravity="center"/>

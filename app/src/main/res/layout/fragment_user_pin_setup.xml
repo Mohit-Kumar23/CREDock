@@ -254,17 +254,6 @@
             android:hint="X"
            android:textSize="@dimen/_20ssp"/>
 
-        <TextView
-            android:id="@+id/tv_resendOtpText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/et_otpDigit4"
-            android:layout_alignEnd="@id/et_otpDigit4"
-            android:text="@string/resend_otp_text"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:textSize="@dimen/_10ssp"
-            android:linksClickable="true"
-            android:textColor="@color/dark_blue" />
     </RelativeLayout>
 
 </FrameLayout>

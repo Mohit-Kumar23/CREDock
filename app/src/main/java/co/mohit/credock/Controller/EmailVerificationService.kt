@@ -30,7 +30,7 @@ class EmailVerificationService{
     private lateinit var recipientName: String;
     private var generatedOTP:Int = 0;
 
-    constructor(pwd:String,recipientEmail: String,recipientName: String)
+    constructor(pwd:String,recipientName: String,recipientEmail: String)
     {
         apiKeyAsPassword = pwd;
         this.recipientEmail = recipientEmail;
@@ -62,7 +62,7 @@ class EmailVerificationService{
                 message.setFrom(InternetAddress(senderEmail))
                 message.setRecipient(Message.RecipientType.TO,InternetAddress(recipientEmail))
                 message.subject = "CREDock Team Support: Email Verification OTP"
-                message.setText("Hello ${recipientName},\n  Thanks for starting your safe and secure journey with us.\nYour OTP for email verification is ${generatedOTP.toString()}")
+                message.setText("Hello ${recipientName},\nThanks for starting your safe and secure journey with us.\nYour OTP for email verification is ${generatedOTP.toString()}")
                 com.sun.mail.smtp.SMTPTransport.send(message)
 
                 retVal = CD_Global_enums.XX_OK.value.toInt()

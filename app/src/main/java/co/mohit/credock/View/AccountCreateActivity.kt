@@ -9,12 +9,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import co.mohit.credock.CD_Global_enums
+import co.mohit.credock.*
 import co.mohit.credock.Controller.EmailVerificationService
-import co.mohit.credock.R
 import kotlinx.android.synthetic.main.activity_account_create.*
 import kotlinx.android.synthetic.main.activity_auth.*
 import kotlinx.android.synthetic.main.fragment_user_pin_setup.*
+import kotlinx.android.synthetic.main.fragment_user_profile_details.*
 
 class AccountCreateActivity : AppCompatActivity() {
 
@@ -22,10 +22,19 @@ class AccountCreateActivity : AppCompatActivity() {
     val userPinFrag = UserPinSetup()
     val fragmentMgr = supportFragmentManager
 
+    //User Information Parameters
+    var userName:String? = null
+    var userEmail:String? = null
+    var userAge:String? = null
+    var userSelectedGenderId:Int? = null
+    var userSelectDesignationId:Int? = null
+    var userSelectedSecurityQueId:Int? = null
+    var userSecurityAnser:String? = null
+
     private var str_newPin: String? = null
     private var str_reEnteredPin: String? = null
     private var str_otpVerify: String? = null
-    private lateinit var emailVerifyService:EmailVerificationService;
+    public lateinit var emailVerifyService:EmailVerificationService;
 
     init {
         System.loadLibrary("api_keys")
@@ -51,20 +60,14 @@ class AccountCreateActivity : AppCompatActivity() {
         super.onResume()
 
         btn_next.setOnClickListener(View.OnClickListener {
-            btn_next.visibility = View.GONE
-            btn_previous.visibility = View.VISIBLE
-            btn_userDetialSubmit.visibility = View.VISIBLE
-            initializeFragments(userPinFrag)
-
-
-            emailVerifyService = EmailVerificationService(GetSendGridApiKey().toString(),"kvnl.mohitchanchlani@gmail.com","Mohit Kumar")
-            var value = emailVerifyService.sendOTPForEmailVerification()
+            performOperationOnNextBtnClick()
         })
 
         btn_previous.setOnClickListener(View.OnClickListener {
             btn_next.visibility = View.VISIBLE
             btn_previous.visibility = View.GONE
             btn_userDetialSubmit.visibility = View.GONE
+            tv_resendOtpText.visibility = View.GONE
             initializeFragments(userProfileFrag)
         })
 
@@ -74,6 +77,13 @@ class AccountCreateActivity : AppCompatActivity() {
             }
         })
 
+        tv_resendOtpText.setOnClickListener(View.OnClickListener {
+            if(emailVerifyService == null)
+            {
+                emailVerifyService = EmailVerificationService(GetSendGridApiKey(),userName!!,userEmail!!)
+            }
+            emailVerifyService.sendOTPForEmailVerification()
+        })
     }
 
     fun checkAndMatchUserPin(): Int {
@@ -162,5 +172,59 @@ class AccountCreateActivity : AppCompatActivity() {
             ).show()
         }
         return value;
+    }
+
+    fun performOperationOnNextBtnClick()
+    {
+        if(!et_userName.text.isNullOrEmpty() and !et_userEmail.text.isNullOrEmpty() and !et_userAge.text.isNullOrEmpty()
+        and (sp_userGender.selectedItemPosition != 0) and (sp_userDesignation.selectedItemPosition != 0)
+        and (sp_userSecurityQuestion.selectedItemPosition != 0) and !et_userSecurityAnswer.text.isNullOrEmpty())
+        {
+            userName = et_userName.text.toString()
+            userEmail = et_userEmail.text.toString()
+            userAge = et_userAge.text.toString()
+            when(sp_userGender.selectedItemPosition)
+            {
+                0 -> userSelectedGenderId = CD_UserGender_enum.MALE.value.toInt();
+                1 -> userSelectedGenderId = CD_UserGender_enum.FEMALE.value.toInt()
+                2 -> userSelectedGenderId = CD_UserGender_enum.OTHER.value.toInt()
+            }
+            when(sp_userDesignation.selectedItemPosition)
+            {
+                0 -> userSelectDesignationId = CD_UserDesignation_enum.STUDENT.value.toInt()
+                1 -> userSelectDesignationId = CD_UserDesignation_enum.PROFESSIONAL.value.toInt()
+                2 -> userSelectDesignationId = CD_UserDesignation_enum.DEFENCE.value.toInt()
+                3 -> userSelectDesignationId = CD_UserDesignation_enum.BUSINESS.value.toInt()
+                4 -> userSelectDesignationId = CD_UserDesignation_enum.HOME_MAKER.value.toInt()
+                5 -> userSelectDesignationId = CD_UserDesignation_enum.FREELANCER.value.toInt()
+                6 -> userSelectDesignationId = CD_UserDesignation_enum.GOVT_EMPOLYEE.value.toInt()
+            }
+            when(sp_userSecurityQuestion.selectedItemPosition)
+            {
+                0 -> userSelectedSecurityQueId = CD_UserSecurityQue_enum.CHILDHOOD_FRIEND_NAME.value.toInt()
+                1 -> userSelectedSecurityQueId = CD_UserSecurityQue_enum.FAVOURITE_HOBBY.value.toInt()
+                2 -> userSelectedSecurityQueId = CD_UserSecurityQue_enum.FAVOURITE_SUBJECT.value.toInt()
+                3 -> userSelectedSecurityQueId = CD_UserSecurityQue_enum.HIGH_SCHOOL_NAME.value.toInt()
+            }
+            userSecurityAnser = et_userSecurityAnswer.text.toString()
+
+
+            btn_next.visibility = View.GONE
+            btn_previous.visibility = View.VISIBLE
+            btn_userDetialSubmit.visibility = View.VISIBLE
+            tv_resendOtpText.visibility = View.VISIBLE
+            initializeFragments(userPinFrag)
+
+            emailVerifyService = EmailVerificationService(
+                GetSendGridApiKey().toString(),
+                userEmail!!,
+                userEmail!!
+            )
+            var value = emailVerifyService.sendOTPForEmailVerification()
+        }
+        else
+        {
+            Toast.makeText(this@AccountCreateActivity,"Please Fill all Details",Toast.LENGTH_SHORT).show()
+        }
     }
 }
