@@ -1,6 +1,8 @@
 package co.mohit.credock.View
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.ContactsContract.CommonDataKinds.Email
 import android.se.omapi.Session
 import android.util.Log
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import co.mohit.credock.*
 import co.mohit.credock.Controller.EmailVerificationService
+import co.mohit.credock.Controller.UserDetails
 import kotlinx.android.synthetic.main.activity_account_create.*
 import kotlinx.android.synthetic.main.activity_auth.*
 import kotlinx.android.synthetic.main.fragment_user_pin_setup.*
@@ -23,13 +26,13 @@ class AccountCreateActivity : AppCompatActivity() {
     val fragmentMgr = supportFragmentManager
 
     //User Information Parameters
-    var userName:String? = null
-    var userEmail:String? = null
-    var userAge:String? = null
+    var str_userName:String? = null
+    var str_userEmail:String? = null
+    var str_userAge:String? = null
     var userSelectedGenderId:Int? = null
     var userSelectDesignationId:Int? = null
     var userSelectedSecurityQueId:Int? = null
-    var userSecurityAnser:String? = null
+    var str_userSecurityAnser:String? = null
 
     private var str_newPin: String? = null
     private var str_reEnteredPin: String? = null
@@ -74,13 +77,20 @@ class AccountCreateActivity : AppCompatActivity() {
         btn_userDetialSubmit.setOnClickListener(View.OnClickListener {
             if (validateUserPinAndOtp() == CD_Global_enums.XX_OK.value.toInt()) {
                 Toast.makeText(this@AccountCreateActivity,"Verification Successfully Done!!!",Toast.LENGTH_LONG).show()
+
+                var m_handler = Handler(Looper.myLooper()!!)
+                m_handler.postDelayed(
+                    {
+                        prepareAndStoreUserDetialsToDB()
+                    }
+                ,2000)
             }
         })
 
         tv_resendOtpText.setOnClickListener(View.OnClickListener {
             if(emailVerifyService == null)
             {
-                emailVerifyService = EmailVerificationService(GetSendGridApiKey(),userName!!,userEmail!!)
+                emailVerifyService = EmailVerificationService(GetSendGridApiKey(),str_userName!!,str_userEmail!!)
             }
             emailVerifyService.sendOTPForEmailVerification()
         })
@@ -180,9 +190,9 @@ class AccountCreateActivity : AppCompatActivity() {
         and (sp_userGender.selectedItemPosition != 0) and (sp_userDesignation.selectedItemPosition != 0)
         and (sp_userSecurityQuestion.selectedItemPosition != 0) and !et_userSecurityAnswer.text.isNullOrEmpty())
         {
-            userName = et_userName.text.toString()
-            userEmail = et_userEmail.text.toString()
-            userAge = et_userAge.text.toString()
+            str_userName = et_userName.text.toString()
+            str_userEmail = et_userEmail.text.toString()
+            str_userAge = et_userAge.text.toString()
             when(sp_userGender.selectedItemPosition)
             {
                 0 -> userSelectedGenderId = CD_UserGender_enum.MALE.value.toInt();
@@ -206,7 +216,7 @@ class AccountCreateActivity : AppCompatActivity() {
                 2 -> userSelectedSecurityQueId = CD_UserSecurityQue_enum.FAVOURITE_SUBJECT.value.toInt()
                 3 -> userSelectedSecurityQueId = CD_UserSecurityQue_enum.HIGH_SCHOOL_NAME.value.toInt()
             }
-            userSecurityAnser = et_userSecurityAnswer.text.toString()
+            str_userSecurityAnser = et_userSecurityAnswer.text.toString()
 
 
             btn_next.visibility = View.GONE
@@ -217,8 +227,8 @@ class AccountCreateActivity : AppCompatActivity() {
 
             emailVerifyService = EmailVerificationService(
                 GetSendGridApiKey().toString(),
-                userEmail!!,
-                userEmail!!
+                str_userName!!,
+                str_userEmail!!
             )
             var value = emailVerifyService.sendOTPForEmailVerification()
         }
@@ -226,5 +236,22 @@ class AccountCreateActivity : AppCompatActivity() {
         {
             Toast.makeText(this@AccountCreateActivity,"Please Fill all Details",Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun prepareAndStoreUserDetialsToDB()
+    {
+        var userDetial = UserDetails()
+
+        userDetial.userName = str_userName
+        userDetial.userEmail = str_userEmail
+        userDetial.userAge = str_userAge?.toInt()
+        userDetial.userGender = userSelectedGenderId?.toInt()
+        userDetial.userDesignation = userSelectDesignationId?.toInt()
+        userDetial.userSecurityQues = userSelectedSecurityQueId?.toInt()
+        userDetial.userSecurityAnswer = str_userSecurityAnser
+        userDetial.userLoginPin = str_newPin?.toInt()
+
+        userDetial.prepareUserID(str_otpVerify!!.toInt())
+
     }
 }
