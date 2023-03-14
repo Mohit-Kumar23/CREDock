@@ -69,7 +69,7 @@ class EmailVerificationService{
             }
             catch (ex:Exception)
             {
-                Log.i("apiException",ex.message.toString())
+                Log.i("ApiException",ex.message.toString())
             }
         }).start()
 

@@ -5,7 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import co.mohit.credock.R
+import android.util.Log
+import co.mohit.credock.Controller.DatabaseService
 import co.mohit.credock.View.AuthActivity
 
 class SplashActivity : AppCompatActivity() {
@@ -19,6 +20,13 @@ class SplashActivity : AppCompatActivity() {
 
     fun moveToAuthActivity()
     {
+        try {
+            DatabaseService().createDBService(this)
+        }
+        catch(ex:Exception)
+        {
+            Log.e("DB Exception",ex.message.toString())
+        }
         var mHandleDelay = Handler(Looper.getMainLooper())
         mHandleDelay.postDelayed({
             var intent: Intent = Intent(this@SplashActivity, AuthActivity::class.java);
