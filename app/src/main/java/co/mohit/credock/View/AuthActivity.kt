@@ -79,10 +79,6 @@ class AuthActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-       /* accountCreateTextBtn?.setOnClickListener(View.OnClickListener {
-            var intent:Intent = Intent(this@AuthActivity,null); //Activity name will come
-            startActivity(intent)
-        })*/
     }
 
     private fun moveToAccountCreateActivity() {

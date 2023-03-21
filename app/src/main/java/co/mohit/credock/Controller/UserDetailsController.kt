@@ -3,44 +3,62 @@ package co.mohit.credock.Controller
 import co.mohit.credock.CD_UserDesignation_enum
 import co.mohit.credock.CD_UserGender_enum
 import co.mohit.credock.CD_UserSecurityQue_enum
+import co.mohit.credock.Model.UserDetailModel
 
-public class UserDetails {
+public class UserDetailsController {
 
-    var userID:String? = null
-        get() = field
-        set(value) {field = value}
+    private var userDetailModel:UserDetailModel
+    constructor()
+    {
+        userDetailModel = UserDetailModel()
+    }
 
-    var userName:String? = null
-        get() = field
-        set(value) {field = value}
+    var userID:Long? = null
+        get() = userDetailModel.userID
 
-    var userEmail:String? = null
-        get() = field
-        set(value) {field = value}
+    var userAccNo:String?
+        get() = userDetailModel.userAccNo
+        set(value) { userDetailModel.userAccNo = value}
 
-    var userAge:Int? = null
-        get() = field
-        set(value) {field = value}
+    var userName:String?
+        get() = userDetailModel.userName
+        set(value) { userDetailModel.userName = value}
 
-    var userGender:Int? = null
-        get() = field
-        set(value) {field = value}
+    var userEmail:String?
+        get() = userDetailModel.userEmail
+        set(value) {userDetailModel.userEmail = value}
 
-    var userDesignation:Int? = null
-        get() = field
-        set(value) {field = value}
+    var userAge:Int?
+        get() = userDetailModel.userAge
+        set(value) {userDetailModel.userAge = value}
 
-    var userSecurityQues:Int? = null
-        get() = field
-        set(value) {field = value}
+    var userGender:Int?
+        get() = userDetailModel.userGender
+        set(value) {userDetailModel.userGender = value}
 
-    var userSecurityAnswer:String? = null
-        get() = field
-        set(value) {field = value}
+    var userDesignation:Int?
+        get() = userDetailModel.userDesignation
+        set(value) {userDetailModel.userDesignation = value}
 
-    var userLoginPin:Int? = null
-        get() = field
-        set(value) {field = value}
+    var userSecurityQues:Int?
+        get() = userDetailModel.userSecurityQue
+        set(value) {userDetailModel.userSecurityQue = value}
+
+    var userSecurityAnswer:String?
+        get() = userDetailModel.userSecurityAnswer
+        set(value) {userDetailModel.userSecurityAnswer = value}
+
+    var userLoginPin:Int?
+        get() = userDetailModel.userLoginPin
+        set(value) {userDetailModel.userLoginPin = value}
+
+    var lastModifiedOnTimeStamp:String?
+        get() = userDetailModel.lastModifiedOnTimeStamp
+        set(value) {userDetailModel.lastModifiedOnTimeStamp = value}
+
+    var createdOnTimeStamp:String?
+        get() = userDetailModel.createdOnTimeStamp
+        set(value) {userDetailModel.createdOnTimeStamp = value}
 
     private val genderList:List<String> = listOf("Male","Female","Other")
     private val designationList:List<String> = listOf("Student","Professional","Defence","Business","Home-maker","Freelancer","Govt. Employee")
@@ -91,13 +109,24 @@ public class UserDetails {
 
     public fun prepareUserID(otpReceived:Int)
     {
+        var accNo:String? = null
+
         var nameArray = this.userName?.split(" ")
         for(str in nameArray!!.iterator())
         {
-            this.userID += str[0].toUpperCase()
+            if(accNo.isNullOrEmpty())
+                accNo = str[0].toUpperCase().toString()
+            else
+                accNo += str[0].toUpperCase()
         }
-        this.userID += "_"
-        this.userID += otpReceived.toString()
+        accNo += "_"
+        accNo += otpReceived.toString()
+
+        this.userAccNo = accNo
     }
 
+    public fun getUserDetailModelInstance():UserDetailModel
+    {
+        return userDetailModel
+    }
 }

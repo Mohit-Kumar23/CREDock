@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import co.mohit.credock.CD_Database_enums
 import co.mohit.credock.CD_Table_Operation
 import java.io.File
+import java.util.Objects
 import kotlin.properties.Delegates
 
 private const val CREDOCK_DB = "CredockDB.db"
@@ -46,11 +47,14 @@ class DatabaseHelper:SQLiteOpenHelper {
         TODO("Not yet implemented")
     }
 
-    fun addRecord(token:Int):Int
+    fun addRecord(token:Int,obj:ContentValues):Int
     {
         var tb_name = determineTableName(token)
+        var db = this.writableDatabase
 
-        return CD_Table_Operation.TB_OPERATION_SUCCESS.value.toInt()
+        var result = db.insert(tb_name,null, obj as ContentValues)
+
+        return result.toInt()
     }
 
     fun updateRecord(token:Int):Int

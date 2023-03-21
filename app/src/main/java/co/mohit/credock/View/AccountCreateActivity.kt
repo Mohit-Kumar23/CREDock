@@ -1,9 +1,11 @@
 package co.mohit.credock.View
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.ContactsContract.CommonDataKinds.Email
+import android.provider.ContactsContract.Data
 import android.se.omapi.Session
 import android.util.Log
 import android.view.View
@@ -12,12 +14,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import co.mohit.credock.*
-import co.mohit.credock.Controller.EmailVerificationService
-import co.mohit.credock.Controller.UserDetails
+import co.mohit.credock.Controller.*
 import kotlinx.android.synthetic.main.activity_account_create.*
 import kotlinx.android.synthetic.main.activity_auth.*
 import kotlinx.android.synthetic.main.fragment_user_pin_setup.*
 import kotlinx.android.synthetic.main.fragment_user_profile_details.*
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.logging.SimpleFormatter
 
 class AccountCreateActivity : AppCompatActivity() {
 
@@ -38,6 +42,7 @@ class AccountCreateActivity : AppCompatActivity() {
     private var str_reEnteredPin: String? = null
     private var str_otpVerify: String? = null
     public lateinit var emailVerifyService:EmailVerificationService;
+    private lateinit var dbService:DatabaseService;
 
     init {
         System.loadLibrary("api_keys")
@@ -56,6 +61,9 @@ class AccountCreateActivity : AppCompatActivity() {
         setContentView(R.layout.activity_account_create)
 
         initializeFragments(userProfileFrag)
+        //dbService = intent.extras?.get("DBHelperInstance") as DatabaseService
+        dbService = DatabaseService()
+        dbService.createDBService(this@AccountCreateActivity)
 
     }
 
@@ -78,12 +86,14 @@ class AccountCreateActivity : AppCompatActivity() {
             if (validateUserPinAndOtp() == CD_Global_enums.XX_OK.value.toInt()) {
                 Toast.makeText(this@AccountCreateActivity,"Verification Successfully Done!!!",Toast.LENGTH_LONG).show()
 
-                var m_handler = Handler(Looper.myLooper()!!)
-                m_handler.postDelayed(
-                    {
-                        prepareAndStoreUserDetialsToDB()
+               Thread(Runnable
+               {    /*Running the Code in Background*/
+                    //Prepare UserDetails class and store in DB
+                   prepareAndStoreUserDetialsToDB()
+                    runOnUiThread{
+
                     }
-                ,2000)
+               }).start()
             }
         })
 
@@ -240,18 +250,40 @@ class AccountCreateActivity : AppCompatActivity() {
 
     fun prepareAndStoreUserDetialsToDB()
     {
-        var userDetial = UserDetails()
+        var cUserDetial = UserDetailsController()
 
-        userDetial.userName = str_userName
-        userDetial.userEmail = str_userEmail
-        userDetial.userAge = str_userAge?.toInt()
-        userDetial.userGender = userSelectedGenderId?.toInt()
-        userDetial.userDesignation = userSelectDesignationId?.toInt()
-        userDetial.userSecurityQues = userSelectedSecurityQueId?.toInt()
-        userDetial.userSecurityAnswer = str_userSecurityAnser
-        userDetial.userLoginPin = str_newPin?.toInt()
+        cUserDetial.userName = str_userName?.trim()
+        cUserDetial.userEmail = str_userEmail?.trim()
+        cUserDetial.userAge = str_userAge?.trim()?.toInt()
+        cUserDetial.userGender = userSelectedGenderId?.toInt()
+        cUserDetial.userDesignation = userSelectDesignationId?.toInt()
+        cUserDetial.userSecurityQues = userSelectedSecurityQueId?.toInt()
+        cUserDetial.userSecurityAnswer = str_userSecurityAnser?.trim()
+        cUserDetial.userLoginPin = str_newPin?.toInt()
+        cUserDetial.lastModifiedOnTimeStamp = SimpleDateFormat.getDateTimeInstance().toString()
+        cUserDetial.createdOnTimeStamp = SimpleDateFormat.getDateTimeInstance().toString()
 
-        userDetial.prepareUserID(str_otpVerify!!.toInt())
+        cUserDetial.prepareUserID(str_otpVerify!!.toInt())
+        if(dbService == null)
+        {
+            dbService = DatabaseService()
+            if(!dbService.isDBCreated)
+            {
+                dbService.createDBService(this@AccountCreateActivity)
+            }
+        }
+        var result = dbService.insertUserToCDUserTableService(this,cUserDetial)
+        if(result != null)
+        {
+            if(result != -1)
+            {
+                Toast.makeText(this@AccountCreateActivity,"Successfully Added",Toast.LENGTH_LONG).show()
+            }
+            else
+            {
+                Toast.makeText(this@AccountCreateActivity,"Failed",Toast.LENGTH_LONG).show()
+            }
+        }
 
     }
 }
