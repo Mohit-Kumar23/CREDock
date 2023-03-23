@@ -36,6 +36,7 @@
         <item>Home-maker</item>
         <item>Freelancer</item>
         <item>Govt. Employee</item>
+        <item>Other</item>
     </string-array>
     <string-array name="security_question_array">
         <item>Select your Security Question</item>

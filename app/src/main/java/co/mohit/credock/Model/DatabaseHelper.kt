@@ -25,22 +25,47 @@ class DatabaseHelper:SQLiteOpenHelper {
 
     override fun onCreate(db: SQLiteDatabase?) {
 
-        var userDetialQuery = """ CREATE TABLE ${USER_DETAIL_TB} (
-            UserID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-            AccountNo NVARCHAR(10) UNIQUE NOT NULL,
+        val userDetialQuery = """ CREATE TABLE ${USER_DETAIL_TB} (
+            AccountNo NVARCHAR(10) PRIMARY KEY NOT NULL,
             Name NVARCHAR(100) NOT NULL,
             EmailId NVARCHAR(100) NOT NULL,
             Age SMALLINT NOT NULL,
-            Gender NVARCHAR(6) NOT NULL,
-            Designation NVARCHAR(50) NOT NULL,
+            Gender SMALLINT NOT NULL,
+            Designation SMALLINT NOT NULL,
             SecurityQueId SMALLINT NOT NULL,
             SecurityAns NVARCHAR(250) NOT NULL,
-            SecurityPin INTEGER UNIQUE  NOT NULL,
-            LastModifiedOn TEXT NOT NULL,
-            CreatedOn TEXT NOT NULL
-        )""".trimIndent()
+            SecurityPin INTEGER UNIQUE NOT NULL,
+            LastModifiedOn DATETIME NOT NULL,
+            CreatedOn DATETIME NOT NULL
+         )""".trimIndent()
 
         db?.execSQL(userDetialQuery)
+
+        val credentialTypeQuery = """ CREATE TABLE ${CREDENTIAL_TYPE_TB} (
+            CredAccNo NVARCHAR(5) PRIMARY KEY NOT NULL,
+            Description NVARCHAR(20) NOT NULL            
+        )""".trimIndent()
+
+        db?.execSQL(credentialTypeQuery)
+
+        val userCredentialQuery = """CREATE TABLE ${CREDENTIAL_TYPE_TB}(
+            DataID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            AccountNo NVARCHAR(10) NOT NULL,
+            CredAccNo NVARCHAR(5) NOT NULL,
+            Platform NVARCHAR(20) NOT NULL,
+            Data BLOB NOT NULL,
+            NumberOfTags SMALLINT NOT NULL,
+            SecurityQueID SMALLINT,
+            SecurityQueText NVARCHAR(50),
+            SecurityAns NVARCHAR(100),
+            MobileNo BIGINT,
+            LastModifiedOn DATETIME NOT NULL,
+            CreatedOn DATETIME NOT NULL,
+            FOREIGN KEY(AccountNo) REFERENCES ${USER_DETAIL_TB} (AccountNo),
+            FOREIGN KEY(CredAccNo) REFERENCES ${CREDENTIAL_TYPE_TB} (CredAccNo)
+        )""".trimIndent()
+
+        db?.execSQL(userCredentialQuery)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -49,10 +74,10 @@ class DatabaseHelper:SQLiteOpenHelper {
 
     fun addRecord(token:Int,obj:ContentValues):Int
     {
-        var tb_name = determineTableName(token)
-        var db = this.writableDatabase
+        val tb_name = determineTableName(token)
+        val db = this.writableDatabase
 
-        var result = db.insert(tb_name,null, obj as ContentValues)
+        val result = db.insert(tb_name,null, obj as ContentValues)
 
         return result.toInt()
     }

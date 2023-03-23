@@ -205,26 +205,28 @@ class AccountCreateActivity : AppCompatActivity() {
             str_userAge = et_userAge.text.toString()
             when(sp_userGender.selectedItemPosition)
             {
-                0 -> userSelectedGenderId = CD_UserGender_enum.MALE.value.toInt();
-                1 -> userSelectedGenderId = CD_UserGender_enum.FEMALE.value.toInt()
-                2 -> userSelectedGenderId = CD_UserGender_enum.OTHER.value.toInt()
+                1 -> userSelectedGenderId = CD_UserGender_enum.MALE.value.toInt();
+                2 -> userSelectedGenderId = CD_UserGender_enum.FEMALE.value.toInt()
+                3 -> userSelectedGenderId = CD_UserGender_enum.OTHER.value.toInt()
             }
             when(sp_userDesignation.selectedItemPosition)
             {
-                0 -> userSelectDesignationId = CD_UserDesignation_enum.STUDENT.value.toInt()
-                1 -> userSelectDesignationId = CD_UserDesignation_enum.PROFESSIONAL.value.toInt()
-                2 -> userSelectDesignationId = CD_UserDesignation_enum.DEFENCE.value.toInt()
-                3 -> userSelectDesignationId = CD_UserDesignation_enum.BUSINESS.value.toInt()
-                4 -> userSelectDesignationId = CD_UserDesignation_enum.HOME_MAKER.value.toInt()
-                5 -> userSelectDesignationId = CD_UserDesignation_enum.FREELANCER.value.toInt()
-                6 -> userSelectDesignationId = CD_UserDesignation_enum.GOVT_EMPOLYEE.value.toInt()
+                1 -> userSelectDesignationId = CD_UserDesignation_enum.STUDENT.value.toInt()
+                2 -> userSelectDesignationId = CD_UserDesignation_enum.PROFESSIONAL.value.toInt()
+                3 -> userSelectDesignationId = CD_UserDesignation_enum.DEFENCE.value.toInt()
+                4 -> userSelectDesignationId = CD_UserDesignation_enum.BUSINESS.value.toInt()
+                5 -> userSelectDesignationId = CD_UserDesignation_enum.HOME_MAKER.value.toInt()
+                6 -> userSelectDesignationId = CD_UserDesignation_enum.FREELANCER.value.toInt()
+                7 -> userSelectDesignationId = CD_UserDesignation_enum.GOVT_EMPOLYEE.value.toInt()
+                8 -> userSelectDesignationId = CD_UserDesignation_enum.OTHER_DESIGNATION.value.toInt()
+
             }
             when(sp_userSecurityQuestion.selectedItemPosition)
             {
-                0 -> userSelectedSecurityQueId = CD_UserSecurityQue_enum.CHILDHOOD_FRIEND_NAME.value.toInt()
-                1 -> userSelectedSecurityQueId = CD_UserSecurityQue_enum.FAVOURITE_HOBBY.value.toInt()
-                2 -> userSelectedSecurityQueId = CD_UserSecurityQue_enum.FAVOURITE_SUBJECT.value.toInt()
-                3 -> userSelectedSecurityQueId = CD_UserSecurityQue_enum.HIGH_SCHOOL_NAME.value.toInt()
+                1 -> userSelectedSecurityQueId = CD_UserSecurityQue_enum.CHILDHOOD_FRIEND_NAME.value.toInt()
+                2 -> userSelectedSecurityQueId = CD_UserSecurityQue_enum.FAVOURITE_HOBBY.value.toInt()
+                3 -> userSelectedSecurityQueId = CD_UserSecurityQue_enum.FAVOURITE_SUBJECT.value.toInt()
+                4 -> userSelectedSecurityQueId = CD_UserSecurityQue_enum.HIGH_SCHOOL_NAME.value.toInt()
             }
             str_userSecurityAnser = et_userSecurityAnswer.text.toString()
 

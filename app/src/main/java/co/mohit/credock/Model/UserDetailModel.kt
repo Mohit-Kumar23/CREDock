@@ -2,10 +2,6 @@ package co.mohit.credock.Model
 
 class UserDetailModel {
 
-    var userID:Long? = null
-        get() = field
-        set(value) {field = value}
-
     var userAccNo:String? = null
         get() = field
         set(value) {field = value}

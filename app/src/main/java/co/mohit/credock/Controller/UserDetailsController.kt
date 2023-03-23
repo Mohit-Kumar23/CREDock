@@ -13,9 +13,6 @@ public class UserDetailsController {
         userDetailModel = UserDetailModel()
     }
 
-    var userID:Long? = null
-        get() = userDetailModel.userID
-
     var userAccNo:String?
         get() = userDetailModel.userAccNo
         set(value) { userDetailModel.userAccNo = value}
