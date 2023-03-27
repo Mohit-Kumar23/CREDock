@@ -66,6 +66,7 @@ class SplashActivity : AppCompatActivity() {
     {
         dbService = DatabaseService()
         dbService.createDBService(this)
+        dbService.closeConnectionFromDB()
         var sharedPrefEditor = sharedPreferences?.edit()
         if(dbService.isDBCreated)
         {

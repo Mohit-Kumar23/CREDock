@@ -48,7 +48,7 @@ class DatabaseHelper:SQLiteOpenHelper {
 
         db?.execSQL(credentialTypeQuery)
 
-        val userCredentialQuery = """CREATE TABLE ${CREDENTIAL_TYPE_TB}(
+        val userCredentialQuery = """CREATE TABLE ${USER_CREDENTIAL_TB}(
             DataID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             AccountNo NVARCHAR(10) NOT NULL,
             CredAccNo NVARCHAR(5) NOT NULL,

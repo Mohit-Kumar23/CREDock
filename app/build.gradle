@@ -38,6 +38,11 @@ android {
             path file('src/main/jni/Android.mk')
         }
     }
+    buildFeatures
+    {
+        viewBinding = true
+    }
+
 
     dependencies {
         implementation fileTree(dir: 'libs', include: ['*.jar'])

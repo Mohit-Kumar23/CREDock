@@ -1,15 +1,9 @@
 package co.mohit.credock.View
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.provider.ContactsContract.CommonDataKinds.Email
-import android.provider.ContactsContract.Data
-import android.se.omapi.Session
 import android.util.Log
 import android.view.View
-import android.widget.TextView
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -19,9 +13,8 @@ import kotlinx.android.synthetic.main.activity_account_create.*
 import kotlinx.android.synthetic.main.activity_auth.*
 import kotlinx.android.synthetic.main.fragment_user_pin_setup.*
 import kotlinx.android.synthetic.main.fragment_user_profile_details.*
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.logging.SimpleFormatter
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class AccountCreateActivity : AppCompatActivity() {
 
@@ -134,10 +127,10 @@ class AccountCreateActivity : AppCompatActivity() {
         if (!str_otpVerify.isNullOrEmpty())
             str_otpVerify = null
 
-        var otpDigit1Et = findViewById<TextView>(R.id.et_otpDigit1)
-        var otpDigit2Et = findViewById<TextView>(R.id.et_otpDigit2)
-        var otpDigit3Et = findViewById<TextView>(R.id.et_otpDigit3)
-        var otpDigit4Et = findViewById<TextView>(R.id.et_otpDigit4)
+        var otpDigit1Et = findViewById<EditText>(R.id.et_otpDigit1)
+        var otpDigit2Et = findViewById<EditText>(R.id.et_otpDigit2)
+        var otpDigit3Et = findViewById<EditText>(R.id.et_otpDigit3)
+        var otpDigit4Et = findViewById<EditText>(R.id.et_otpDigit4)
 
         str_otpVerify = otpDigit1Et.text?.toString()
         str_otpVerify += otpDigit2Et.text
@@ -262,8 +255,10 @@ class AccountCreateActivity : AppCompatActivity() {
         cUserDetial.userSecurityQues = userSelectedSecurityQueId?.toInt()
         cUserDetial.userSecurityAnswer = str_userSecurityAnser?.trim()
         cUserDetial.userLoginPin = str_newPin?.toInt()
-        cUserDetial.lastModifiedOnTimeStamp = SimpleDateFormat.getDateTimeInstance().toString()
-        cUserDetial.createdOnTimeStamp = SimpleDateFormat.getDateTimeInstance().toString()
+        val currentDateTime = LocalDateTime.now()
+        val dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy/HH:mm:ss")
+        cUserDetial.lastModifiedOnTimeStamp = currentDateTime.format(dateTimeFormatter)
+        cUserDetial.createdOnTimeStamp = currentDateTime.format(dateTimeFormatter)
 
         cUserDetial.prepareUserID(str_otpVerify!!.toInt())
         if(dbService == null)
@@ -279,11 +274,11 @@ class AccountCreateActivity : AppCompatActivity() {
         {
             if(result != -1)
             {
-                Toast.makeText(this@AccountCreateActivity,"Successfully Added",Toast.LENGTH_LONG).show()
+                Log.e("Record Added","Successfully Added")
             }
             else
             {
-                Toast.makeText(this@AccountCreateActivity,"Failed",Toast.LENGTH_LONG).show()
+                Log.e("Record Failed to add","Fail to Added")
             }
         }
 
