@@ -1,5 +1,7 @@
 package co.mohit.credock.View
 
+import android.content.ContentValues
+import android.content.Context
 import android.os.Bundle
 import android.os.TestLooperManager
 import android.text.Editable
@@ -10,26 +12,42 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnKeyListener
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
+import co.mohit.credock.CD_Global_enums
+import co.mohit.credock.Controller.EmailVerificationService
 import co.mohit.credock.R
+import co.mohit.credock.databinding.FragmentUserPinSetupBinding
 import kotlinx.android.synthetic.main.fragment_user_pin_setup.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [UserPinSetup.newInstance] factory method to
- * create an instance of this fragment.
- */
 class UserPinSetup : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
-    private var keyEventCode:Int? = null
+    private lateinit var userPinSetupCallback:IUserDetailFragmentToActivity
+    private lateinit var userPinDetailBinder:FragmentUserPinSetupBinding
+    private var userPinSetupContentValues: ContentValues?= null
+    private var str_newPin:String? = null
+    private var str_reEnteredPin:String? = null
+    private var str_otpVerify:String? = null
+    private lateinit var emailService:EmailVerificationService
 
+   override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            //Implementing concept of Dynamic Polymorphism
+            userPinSetupCallback = context as IUserDetailFragmentToActivity
+        }
+        catch (ex:Exception)
+        {
+            throw java.lang.ClassCastException("${context.toString()} must implements IUserDetailFragmentToActivity")
+        }
+    }
    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -42,8 +60,9 @@ class UserPinSetup : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        userPinDetailBinder = FragmentUserPinSetupBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_pin_setup, container, false)
+        return userPinDetailBinder.root
     }
 
     override fun onResume() {
@@ -170,19 +189,12 @@ class UserPinSetup : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
+
     }
 
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment UserPinSetup.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             UserPinSetup().apply {
@@ -191,5 +203,99 @@ class UserPinSetup : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    fun validateUserPinAndOtp() {
+        var value = checkAndMatchUserPin()
+        if (value == CD_Global_enums.XX_OK.value.toInt())
+        {
+            value = verifyOtpEntered()
+            if (value == CD_Global_enums.XX_OK.value.toInt())
+            {
+                userPinSetupContentValues = ContentValues()
+                userPinSetupContentValues?.put("userPin",str_newPin)
+                userPinSetupContentValues?.put("otpReceived",str_otpVerify)
+            }
+            else if (value == CD_Global_enums.XX_ERROR.value.toInt())
+            {
+                Toast.makeText(
+                    this.context,
+                    "Invalid OTP entered",
+                    Toast.LENGTH_SHORT
+                ).show()
+                userPinSetupContentValues = null
+            }
+            else
+            {
+                Toast.makeText(
+                    this.context,
+                    "Please Enter Received OTP!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                userPinSetupContentValues = null
+            }
+        }
+        else if (value == CD_Global_enums.XX_ERROR.value.toInt())
+        {
+            Toast.makeText(
+                this.context,
+                "Two Entered Pins Mismatch!",
+                Toast.LENGTH_SHORT
+            ).show()
+            userPinSetupContentValues = null
+        }
+        else {
+            Toast.makeText(
+                this.context,
+                "Please Enter Your New Pin",
+                Toast.LENGTH_SHORT
+            ).show()
+            userPinSetupContentValues = null
+        }
+        userPinSetupCallback.getUserPinSetupEvents(userPinSetupContentValues)
+    }
+
+    fun checkAndMatchUserPin(): Int {
+        if (str_newPin != null)
+            str_newPin = null
+        if (str_reEnteredPin != null)
+            str_reEnteredPin = null
+
+        str_newPin = userPinDetailBinder.etNewPinDigit1.text?.toString()
+        str_newPin += userPinDetailBinder.etNewPinDigit2.text
+        str_newPin += userPinDetailBinder.etNewPinDigit3.text
+        str_newPin += userPinDetailBinder.etNewPinDigit4.text
+
+        str_reEnteredPin = userPinDetailBinder.etReEnterPinDigit1.text?.toString()
+        str_reEnteredPin += userPinDetailBinder.etReEnterPinDigit2.text
+        str_reEnteredPin += userPinDetailBinder.etReEnterPinDigit3.text
+        str_reEnteredPin += userPinDetailBinder.etReEnterPinDigit4.text
+
+        if (str_newPin.isNullOrEmpty() || str_reEnteredPin.isNullOrEmpty())
+            return CD_Global_enums.XX_NOTFOUND.value.toInt()
+        else if (str_newPin.equals(str_reEnteredPin))
+            return CD_Global_enums.XX_OK.value.toInt()
+        else
+            return CD_Global_enums.XX_ERROR.value.toInt()
+    }
+
+    fun verifyOtpEntered(): Int {
+        if (!str_otpVerify.isNullOrEmpty())
+            str_otpVerify = null
+
+        str_otpVerify = userPinDetailBinder.etOtpDigit1.text?.toString()
+        str_otpVerify += userPinDetailBinder.etOtpDigit2.text
+        str_otpVerify += userPinDetailBinder.etOtpDigit3.text
+        str_otpVerify += userPinDetailBinder.etOtpDigit4.text
+
+        if (!str_otpVerify.isNullOrEmpty())
+            return emailService.verifyInputOtp(str_otpVerify!!.toInt())
+        else
+            return CD_Global_enums.XX_NOTFOUND.value.toInt()
+    }
+
+    fun initializeParamsForEmailService(emailService:EmailVerificationService)
+    {
+        this.emailService = emailService
     }
 }

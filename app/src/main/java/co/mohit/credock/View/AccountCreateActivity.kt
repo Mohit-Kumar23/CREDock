@@ -1,5 +1,7 @@
 package co.mohit.credock.View
 
+import android.content.ContentValues
+import android.net.wifi.p2p.WifiP2pManager.UpnpServiceResponseListener
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,8 +18,8 @@ import kotlinx.android.synthetic.main.fragment_user_profile_details.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class AccountCreateActivity : AppCompatActivity() {
-
+class AccountCreateActivity : AppCompatActivity(),IUserDetailFragmentToActivity
+{
     val userProfileFrag = UserProfileDetails()
     val userPinFrag = UserPinSetup()
     val fragmentMgr = supportFragmentManager
@@ -29,12 +31,12 @@ class AccountCreateActivity : AppCompatActivity() {
     var userSelectedGenderId:Int? = null
     var userSelectDesignationId:Int? = null
     var userSelectedSecurityQueId:Int? = null
-    var str_userSecurityAnser:String? = null
+    var str_userSecurityAnswer:String? = null
 
     private var str_newPin: String? = null
     private var str_reEnteredPin: String? = null
     private var str_otpVerify: String? = null
-    public lateinit var emailVerifyService:EmailVerificationService;
+    lateinit var emailVerifyService:EmailVerificationService;
     private lateinit var dbService:DatabaseService;
 
     init {
@@ -64,7 +66,7 @@ class AccountCreateActivity : AppCompatActivity() {
         super.onResume()
 
         btn_next.setOnClickListener(View.OnClickListener {
-            performOperationOnNextBtnClick()
+            userProfileFrag.performOperationOnNextBtnClick()
         })
 
         btn_previous.setOnClickListener(View.OnClickListener {
@@ -76,18 +78,7 @@ class AccountCreateActivity : AppCompatActivity() {
         })
 
         btn_userDetialSubmit.setOnClickListener(View.OnClickListener {
-            if (validateUserPinAndOtp() == CD_Global_enums.XX_OK.value.toInt()) {
-                Toast.makeText(this@AccountCreateActivity,"Verification Successfully Done!!!",Toast.LENGTH_LONG).show()
-
-               Thread(Runnable
-               {    /*Running the Code in Background*/
-                    //Prepare UserDetails class and store in DB
-                   prepareAndStoreUserDetialsToDB()
-                    runOnUiThread{
-
-                    }
-               }).start()
-            }
+                userPinFrag.validateUserPinAndOtp()
         })
 
         tv_resendOtpText.setOnClickListener(View.OnClickListener {
@@ -97,150 +88,6 @@ class AccountCreateActivity : AppCompatActivity() {
             }
             emailVerifyService.sendOTPForEmailVerification()
         })
-    }
-
-    fun checkAndMatchUserPin(): Int {
-        if (str_newPin != null)
-            str_newPin = null
-        if (str_reEnteredPin != null)
-            str_reEnteredPin = null
-
-        str_newPin = et_newPinDigit1.text?.toString()
-        str_newPin += et_newPinDigit2.text
-        str_newPin += et_newPinDigit3.text
-        str_newPin += et_newPinDigit4.text
-
-        str_reEnteredPin = et_reEnterPinDigit1.text?.toString()
-        str_reEnteredPin += et_reEnterPinDigit2.text
-        str_reEnteredPin += et_reEnterPinDigit3.text
-        str_reEnteredPin += et_reEnterPinDigit4.text
-
-        if (str_newPin.isNullOrEmpty() || str_reEnteredPin.isNullOrEmpty())
-            return CD_Global_enums.XX_NOTFOUND.value.toInt()
-        else if (str_newPin.equals(str_reEnteredPin))
-            return CD_Global_enums.XX_OK.value.toInt()
-        else
-            return CD_Global_enums.XX_ERROR.value.toInt()
-    }
-
-    fun verifyOtpEntered(): Int {
-        if (!str_otpVerify.isNullOrEmpty())
-            str_otpVerify = null
-
-        var otpDigit1Et = findViewById<EditText>(R.id.et_otpDigit1)
-        var otpDigit2Et = findViewById<EditText>(R.id.et_otpDigit2)
-        var otpDigit3Et = findViewById<EditText>(R.id.et_otpDigit3)
-        var otpDigit4Et = findViewById<EditText>(R.id.et_otpDigit4)
-
-        str_otpVerify = otpDigit1Et.text?.toString()
-        str_otpVerify += otpDigit2Et.text
-        str_otpVerify += otpDigit3Et.text
-        str_otpVerify += otpDigit4Et.text
-
-        if (!str_otpVerify.isNullOrEmpty())
-            return emailVerifyService.verifyInputOtp(str_otpVerify!!.toInt())
-        else
-            return CD_Global_enums.XX_NOTFOUND.value.toInt()
-    }
-
-    fun validateUserPinAndOtp(): Int {
-        var value = checkAndMatchUserPin()
-        if (value == CD_Global_enums.XX_OK.value.toInt())
-        {
-            value = verifyOtpEntered()
-            if (value == CD_Global_enums.XX_OK.value.toInt())
-            {
-                //do nothing
-            }
-            else if (value == CD_Global_enums.XX_ERROR.value.toInt())
-            {
-                Toast.makeText(
-                    this@AccountCreateActivity,
-                    "Invalid OTP entered",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            else
-            {
-                Toast.makeText(
-                    this@AccountCreateActivity,
-                    "Please Enter Received OTP!",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
-        else if (value == CD_Global_enums.XX_ERROR.value.toInt())
-        {
-            Toast.makeText(
-                this@AccountCreateActivity,
-                "Two Entered Pins Mismatch!",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-        else {
-            Toast.makeText(
-                this@AccountCreateActivity,
-                "Please Enter Your New Pin",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-        return value;
-    }
-
-    fun performOperationOnNextBtnClick()
-    {
-        if(!et_userName.text.isNullOrEmpty() and !et_userEmail.text.isNullOrEmpty() and !et_userAge.text.isNullOrEmpty()
-        and (sp_userGender.selectedItemPosition != 0) and (sp_userDesignation.selectedItemPosition != 0)
-        and (sp_userSecurityQuestion.selectedItemPosition != 0) and !et_userSecurityAnswer.text.isNullOrEmpty())
-        {
-            str_userName = et_userName.text.toString()
-            str_userEmail = et_userEmail.text.toString()
-            str_userAge = et_userAge.text.toString()
-            when(sp_userGender.selectedItemPosition)
-            {
-                1 -> userSelectedGenderId = CD_UserGender_enum.MALE.value.toInt();
-                2 -> userSelectedGenderId = CD_UserGender_enum.FEMALE.value.toInt()
-                3 -> userSelectedGenderId = CD_UserGender_enum.OTHER.value.toInt()
-            }
-            when(sp_userDesignation.selectedItemPosition)
-            {
-                1 -> userSelectDesignationId = CD_UserDesignation_enum.STUDENT.value.toInt()
-                2 -> userSelectDesignationId = CD_UserDesignation_enum.PROFESSIONAL.value.toInt()
-                3 -> userSelectDesignationId = CD_UserDesignation_enum.DEFENCE.value.toInt()
-                4 -> userSelectDesignationId = CD_UserDesignation_enum.BUSINESS.value.toInt()
-                5 -> userSelectDesignationId = CD_UserDesignation_enum.HOME_MAKER.value.toInt()
-                6 -> userSelectDesignationId = CD_UserDesignation_enum.FREELANCER.value.toInt()
-                7 -> userSelectDesignationId = CD_UserDesignation_enum.GOVT_EMPOLYEE.value.toInt()
-                8 -> userSelectDesignationId = CD_UserDesignation_enum.OTHER_DESIGNATION.value.toInt()
-
-            }
-            when(sp_userSecurityQuestion.selectedItemPosition)
-            {
-                1 -> userSelectedSecurityQueId = CD_UserSecurityQue_enum.CHILDHOOD_FRIEND_NAME.value.toInt()
-                2 -> userSelectedSecurityQueId = CD_UserSecurityQue_enum.FAVOURITE_HOBBY.value.toInt()
-                3 -> userSelectedSecurityQueId = CD_UserSecurityQue_enum.FAVOURITE_SUBJECT.value.toInt()
-                4 -> userSelectedSecurityQueId = CD_UserSecurityQue_enum.HIGH_SCHOOL_NAME.value.toInt()
-            }
-            str_userSecurityAnser = et_userSecurityAnswer.text.toString()
-
-
-            btn_next.visibility = View.GONE
-            btn_previous.visibility = View.VISIBLE
-            btn_userDetialSubmit.visibility = View.VISIBLE
-            tv_resendOtpText.visibility = View.VISIBLE
-            initializeFragments(userPinFrag)
-
-            emailVerifyService = EmailVerificationService(
-                GetSendGridApiKey().toString(),
-                str_userName!!,
-                str_userEmail!!
-            )
-            var value = emailVerifyService.sendOTPForEmailVerification()
-        }
-        else
-        {
-            Toast.makeText(this@AccountCreateActivity,"Please Fill all Details",Toast.LENGTH_SHORT).show()
-        }
     }
 
     fun prepareAndStoreUserDetialsToDB()
@@ -253,7 +100,7 @@ class AccountCreateActivity : AppCompatActivity() {
         cUserDetial.userGender = userSelectedGenderId?.toInt()
         cUserDetial.userDesignation = userSelectDesignationId?.toInt()
         cUserDetial.userSecurityQues = userSelectedSecurityQueId?.toInt()
-        cUserDetial.userSecurityAnswer = str_userSecurityAnser?.trim()
+        cUserDetial.userSecurityAnswer = str_userSecurityAnswer?.trim()
         cUserDetial.userLoginPin = str_newPin?.toInt()
         val currentDateTime = LocalDateTime.now()
         val dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy/HH:mm:ss")
@@ -282,5 +129,54 @@ class AccountCreateActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    override fun getUserPinSetupEvents(contentValues: ContentValues?) {
+        if(contentValues != null)
+        {
+            Toast.makeText(this@AccountCreateActivity,"Verification Successfully Done!!!",Toast.LENGTH_LONG).show()
+            Thread(Runnable
+            {    /*Running the Code in Background*/
+                str_newPin = contentValues.get("userPin")?.toString()
+                str_otpVerify = contentValues.get("otpReceived")?.toString()
+                //Prepare UserDetails class and store in DB
+                prepareAndStoreUserDetialsToDB()
+                runOnUiThread{
+                    //may be some animation
+                }
+            }).start()
+        }
+    }
+
+    override fun getUserProfileDetails(contentValues: ContentValues?) {
+
+        if(contentValues != null)
+        {
+            str_userName = contentValues.get("userName")?.toString()
+            str_userEmail = contentValues.get("userEmail")?.toString()
+            str_userAge = contentValues.get("userAge")?.toString()
+            userSelectedGenderId = contentValues.getAsInteger("userSelectedGenderId")
+            userSelectDesignationId = contentValues.getAsInteger("userSelectDesignationId")
+            userSelectedSecurityQueId = contentValues.getAsInteger("userSelectedSecurityQueId")
+            str_userSecurityAnswer = contentValues.get("userSecurityAnswer")?.toString()
+
+            emailVerifyService = EmailVerificationService(
+                GetSendGridApiKey().toString(),
+                str_userName!!,
+                str_userEmail!!)
+
+            emailVerifyService.sendOTPForEmailVerification()
+            moveToUserPinSetupFragment()
+        }
+    }
+
+    private fun moveToUserPinSetupFragment()
+    {
+        btn_next.visibility = View.GONE
+        btn_previous.visibility = View.VISIBLE
+        btn_userDetialSubmit.visibility = View.VISIBLE
+        tv_resendOtpText.visibility = View.VISIBLE
+        userPinFrag.initializeParamsForEmailService(emailVerifyService)
+        initializeFragments(userPinFrag)
     }
 }
