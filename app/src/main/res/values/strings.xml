@@ -21,6 +21,8 @@
     <string name="re_enter_your_pin">Re-Enter Your PIN</string>
     <string name="enterOtpText">Enter Your OTP send to your Email</string>
     <string name="resend_otp_text">Resend OTP</string>
+    <string name="credentials_text">Credentials</string>
+    <string name="profile_text">Profile</string>
     <string-array name="gender_array">
         <item>Gender</item>
         <item>Male</item>

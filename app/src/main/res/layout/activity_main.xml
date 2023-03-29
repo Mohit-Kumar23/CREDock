@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.MainActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hGuieLine1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.91" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hGuideLine2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.97" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vGuideLine1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.12" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vGuideLine2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.88" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavBar_mainActivity"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:itemIconSize="@dimen/_18sdp"
+        android:background="@drawable/custom_btn_design"
+        app:layout_constraintBottom_toTopOf="@+id/hGuideLine2"
+        app:layout_constraintEnd_toStartOf="@+id/vGuideLine2"
+        app:layout_constraintStart_toStartOf="@+id/vGuideLine1"
+        app:layout_constraintTop_toTopOf="@+id/hGuieLine1"
+        app:menu="@menu/bottom_navigation_items" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
