@@ -34,6 +34,12 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.88" />
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragContainerView_userProfile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_user_profile"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavBar_mainActivity"
         android:layout_width="0dp"

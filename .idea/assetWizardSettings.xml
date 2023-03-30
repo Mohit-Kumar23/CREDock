@@ -326,7 +326,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialiconsoutlined/add_circle/outline_add_circle_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialiconsoutlined/edit/outline_edit_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -336,7 +336,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="new_cred_icon" />
+                            <entry key="outputName" value="edit_pencil_icon" />
                             <entry key="sourceFile" value="C:\Users\Dell\AndroidStudioProjects\CREDock" />
                           </map>
                         </option>

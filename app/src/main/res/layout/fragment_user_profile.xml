@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".View.UserProfileFragment">
+
+   <!--<ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">-->
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:id="@+id/constLayout_userProfile"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       tools:ignore="InvalidId">
+
+      <androidx.constraintlayout.widget.Guideline
+          android:id="@+id/hGuideLine1"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="horizontal"
+          app:layout_constraintGuide_percent="0.07"/>
+
+      <androidx.constraintlayout.widget.Guideline
+          android:id="@+id/hGuideLine2"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="horizontal"
+          app:layout_constraintGuide_percent="0.28"/>
+
+      <androidx.constraintlayout.widget.Guideline
+          android:id="@+id/vGuideLine1"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          app:layout_constraintGuide_percent="0.05"/>
+
+      <androidx.constraintlayout.widget.Guideline
+          android:id="@+id/vGuideLine2"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          app:layout_constraintGuide_percent="0.33"/>
+
+      <androidx.constraintlayout.widget.Guideline
+          android:id="@+id/vGuideLine3"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          app:layout_constraintGuide_percent="0.43"/>
+
+      <androidx.constraintlayout.widget.Guideline
+          android:id="@+id/vGuideLine4"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          app:layout_constraintGuide_percent="0.8"/>
+
+      <androidx.constraintlayout.widget.Guideline
+          android:id="@+id/vGuideLine5"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          app:layout_constraintGuide_percent="0.95"/>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:background="@drawable/bg_splash"
+          app:layout_constraintBottom_toBottomOf="@id/hGuideLine2"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+      <include
+          layout="@layout/custom_user_profile_image"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_marginTop="@dimen/_18sdp"
+          android:layout_marginBottom="@dimen/_15sdp"
+          app:layout_constraintBottom_toBottomOf="@id/hGuideLine2"
+          app:layout_constraintEnd_toStartOf="@+id/vGuideLine3"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine1"
+          app:layout_constraintTop_toTopOf="parent" />
+
+      <TextView
+          android:id="@+id/tv_helloText"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/_20sdp"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine3"
+          app:layout_constraintEnd_toEndOf="@id/vGuideLine5"
+          android:text="@string/hello_text"
+          android:textColor="@color/black"
+          android:layout_marginStart="@dimen/_5sdp"
+          android:fontFamily="@font/koho_semibold"
+          android:textStyle="italic"
+          android:textSize="@dimen/_28sdp"/>
+
+      <TextView
+          android:id="@+id/tv_userName"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_marginTop="@dimen/_20sdp"
+          app:layout_constraintTop_toTopOf="@id/tv_helloText"
+          app:layout_constraintBottom_toBottomOf="@id/hGuideLine2"
+          app:layout_constraintEnd_toEndOf="@id/vGuideLine5"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine3"
+          android:text="Mohit Kumar"
+          android:gravity="bottom"
+          android:textColor="@color/black"
+          android:layout_marginStart="@dimen/_5sdp"
+          android:fontFamily="@font/koho_semibold"
+          android:textStyle="italic"
+          android:textSize="@dimen/_32sdp"/>
+
+      <TextView
+          android:id="@+id/tv_userId"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toTopOf="@id/hGuideLine2"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine1"
+          app:layout_constraintEnd_toEndOf="@id/vGuideLine2"
+          android:layout_marginTop="@dimen/_20sdp"
+          android:text="@string/userID"
+          android:gravity="center"
+          android:textStyle="bold"
+          android:textColor="@color/grey"
+          android:textSize="@dimen/_13ssp"/>
+
+      <TextView
+          android:id="@+id/tv_userEmail"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toBottomOf="@id/tv_userId"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine1"
+          app:layout_constraintEnd_toEndOf="@id/vGuideLine2"
+          android:layout_marginTop="@dimen/_20sdp"
+          android:text="@string/userEmail"
+          android:gravity="center"
+          android:textColor="@color/grey"
+          android:textStyle="bold"
+          android:textSize="@dimen/_13ssp"/>
+
+      <TextView
+          android:id="@+id/tv_userGender"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toBottomOf="@id/tv_userEmail"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine1"
+          app:layout_constraintEnd_toEndOf="@id/vGuideLine2"
+          android:layout_marginTop="@dimen/_20sdp"
+          android:text="@string/userGender"
+          android:gravity="center"
+          android:textStyle="bold"
+          android:textSize="@dimen/_13ssp"/>
+
+      <TextView
+          android:id="@+id/tv_userAge"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toBottomOf="@id/tv_userGender"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine1"
+          app:layout_constraintEnd_toEndOf="@id/vGuideLine2"
+          android:layout_marginTop="@dimen/_20sdp"
+          android:text="@string/userAge"
+          android:gravity="center"
+          android:textStyle="bold"
+          android:textSize="@dimen/_13ssp"/>
+
+      <TextView
+          android:id="@+id/tv_userDesignation"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toBottomOf="@id/tv_userAge"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine1"
+          app:layout_constraintEnd_toEndOf="@id/vGuideLine2"
+          android:layout_marginTop="@dimen/_20sdp"
+          android:text="@string/userDesignation"
+          android:gravity="center"
+          android:textStyle="bold"
+          android:textSize="@dimen/_13ssp"/>
+
+      <TextView
+          android:id="@+id/tv_userSecurityQue"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toBottomOf="@id/tv_userDesignation"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine1"
+          app:layout_constraintEnd_toEndOf="@id/vGuideLine2"
+          android:layout_marginTop="@dimen/_20sdp"
+          android:text="@string/userSecurityQuestion"
+          android:gravity="center"
+          android:textStyle="bold"
+          android:textSize="@dimen/_13ssp"/>
+
+      <TextView
+          android:id="@+id/tv_userSecurityAns"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toBottomOf="@id/tv_userSecurityQue"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine1"
+          app:layout_constraintEnd_toEndOf="@id/vGuideLine2"
+          android:layout_marginTop="@dimen/_20sdp"
+          android:text="@string/userSecurityAnswer"
+          android:gravity="center"
+          android:textStyle="bold"
+          android:textSize="@dimen/_13ssp"/>
+
+      <TextView
+          android:id="@+id/tv_userPin"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toBottomOf="@id/tv_userSecurityAns"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine1"
+          app:layout_constraintEnd_toEndOf="@id/vGuideLine2"
+          android:layout_marginTop="@dimen/_20sdp"
+          android:text="@string/UserPin"
+          android:gravity="center"
+          android:textStyle="bold"
+          android:textSize="@dimen/_13ssp"/>
+
+
+      <TextView
+          android:id="@+id/tv_userIdValue"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toTopOf="@id/hGuideLine2"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine2"
+          app:layout_constraintEnd_toEndOf="@id/vGuideLine5"
+          android:layout_marginTop="@dimen/_20sdp"
+          android:text="MK_6862"
+          android:gravity="left"
+          android:paddingStart="@dimen/_5sdp"
+          android:textColor="@color/black"
+          android:textSize="@dimen/_11ssp"/>
+
+      <EditText
+          android:id="@+id/et_userEmail"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:enabled="false"
+          android:paddingStart="@dimen/_5sdp"
+          android:text="kvnl.mohitchanchlani@gmail.com"
+          android:textColor="@color/black"
+          android:textSize="@dimen/_11ssp"
+          app:layout_constraintBottom_toBottomOf="@id/tv_userEmail"
+          app:layout_constraintEnd_toStartOf="@id/vGuideLine5"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine2"
+          app:layout_constraintTop_toTopOf="@+id/tv_userEmail"
+          tools:ignore="RtlSymmetry" />
+
+      <TextView
+          android:id="@+id/et_userGenderValue"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:enabled="false"
+          android:paddingStart="@dimen/_5sdp"
+          android:text="Male"
+          android:textColor="@color/black"
+          android:textSize="@dimen/_11ssp"
+          app:layout_constraintBottom_toBottomOf="@+id/tv_userGender"
+          app:layout_constraintEnd_toStartOf="@id/vGuideLine5"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine2"
+          app:layout_constraintTop_toTopOf="@+id/tv_userGender"
+          tools:ignore="RtlSymmetry" />
+
+      <EditText
+          android:id="@+id/sp_userAge"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:enabled="false"
+          android:paddingStart="@dimen/_5sdp"
+          android:text="22 Yrs"
+          android:textColor="@color/black"
+          android:textSize="@dimen/_11ssp"
+          app:layout_constraintBottom_toBottomOf="@+id/tv_userAge"
+          app:layout_constraintEnd_toStartOf="@id/vGuideLine5"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine2"
+          app:layout_constraintTop_toTopOf="@+id/tv_userAge"
+          tools:ignore="RtlSymmetry" />
+
+      <Spinner
+          android:id="@+id/sp_userDesignation"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:enabled="false"
+          android:paddingStart="@dimen/_5sdp"
+          android:text="Professional"
+          android:textColor="@color/black"
+          android:textSize="@dimen/_11ssp"
+          app:layout_constraintBottom_toBottomOf="@+id/tv_userDesignation"
+          app:layout_constraintEnd_toStartOf="@id/vGuideLine5"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine2"
+          app:layout_constraintTop_toTopOf="@+id/tv_userDesignation"
+          android:entries="@array/designation_array"
+          tools:ignore="RtlSymmetry" />
+
+      <Spinner
+          android:id="@+id/sp_userSecurityQue"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:enabled="false"
+          android:paddingStart="@dimen/_5sdp"
+          android:text="What's your Childhood Name?"
+          android:textColor="@color/black"
+          android:textSize="@dimen/_11ssp"
+          app:layout_constraintBottom_toBottomOf="@+id/tv_userSecurityQue"
+          app:layout_constraintEnd_toStartOf="@id/vGuideLine5"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine2"
+          app:layout_constraintTop_toTopOf="@+id/tv_userSecurityQue"
+          android:entries="@array/security_question_array"
+          tools:ignore="RtlSymmetry" />
+
+      <EditText
+          android:id="@+id/et_userSecurityAns"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:enabled="false"
+          android:paddingStart="@dimen/_5sdp"
+          android:text="akash"
+          android:textColor="@color/black"
+          android:textSize="@dimen/_11ssp"
+          app:layout_constraintBottom_toBottomOf="@+id/tv_userSecurityAns"
+          app:layout_constraintEnd_toStartOf="@id/vGuideLine5"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine2"
+          app:layout_constraintTop_toTopOf="@+id/tv_userSecurityAns"
+          tools:ignore="RtlSymmetry" />
+
+      <EditText
+          android:id="@+id/et_userPin"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:enabled="false"
+          android:paddingStart="@dimen/_5sdp"
+          android:text="XXXX"
+          android:textColor="@color/black"
+          android:textSize="@dimen/_11ssp"
+          app:layout_constraintBottom_toBottomOf="@+id/tv_userPin"
+          app:layout_constraintEnd_toStartOf="@id/vGuideLine5"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine2"
+          app:layout_constraintTop_toTopOf="@+id/tv_userPin"
+          tools:ignore="RtlSymmetry" />
+
+      <ImageButton
+          android:id="@+id/imgBtn_edit"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          
+          android:background="@drawable/custom_input_view"
+          app:layout_constraintEnd_toEndOf="@id/vGuideLine5"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintStart_toStartOf="@id/vGuideLine4"
+          app:layout_constraintBottom_toBottomOf="@id/hGuideLine1"
+          android:src="@drawable/edit_pencil_icon"
+          android:layout_marginTop="@dimen/_10sdp"/>
+
+      <Button
+          android:id="@+id/btn_saveBtn"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/custom_btn_design"
+          android:text="@string/save_text"
+          android:layout_marginTop="@dimen/_10sdp"
+          app:layout_constraintTop_toBottomOf="@id/et_userPin"
+          app:layout_constraintEnd_toStartOf="@id/vGuideLine5"/>
+
+      <Button
+          android:id="@+id/btn_cancelBtn"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/cancel_text"
+          android:textSize="@dimen/_12ssp"
+          android:layout_marginTop="@dimen/_10sdp"
+          android:layout_marginEnd="@dimen/_10sdp"
+          android:textColor="@color/black"
+          android:background="@android:color/transparent"
+          app:layout_constraintTop_toBottomOf="@id/et_userPin"
+          app:layout_constraintEnd_toStartOf="@id/btn_saveBtn"/>
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--   </ScrollView>-->
+</FrameLayout>

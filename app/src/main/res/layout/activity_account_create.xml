@@ -53,7 +53,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/hGuideLine2"/>
 
-    <androidx.cardview.widget.CardView
+<!--    <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:elevation="@dimen/_20sdp"
@@ -70,7 +70,16 @@
             android:background="@color/light_green"
             app:layout_constraintDimensionRatio="1:1" />
 
-    </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>-->
+
+    <include
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        layout="@layout/custom_user_profile_image"
+        app:layout_constraintBottom_toTopOf="@id/hGuideLine3"
+        app:layout_constraintTop_toTopOf="@id/hGuideLine1"
+        app:layout_constraintStart_toStartOf="@id/vGuideLine1"
+        app:layout_constraintEnd_toEndOf="@id/vGuideLine2"/>
 
     <RelativeLayout
         android:layout_width="0dp"

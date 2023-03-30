@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:elevation="@dimen/_20sdp"
+    app:cardCornerRadius="@dimen/_500sdp"
+    app:layout_constraintBottom_toTopOf="@id/hGuideLine3"
+    app:layout_constraintTop_toTopOf="@id/hGuideLine1"
+    app:layout_constraintStart_toStartOf="@id/vGuideLine1"
+    app:layout_constraintEnd_toEndOf="@id/vGuideLine2">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/avatar"
+            android:background="@color/light_green"
+            app:layout_constraintDimensionRatio="1:1" />
+
+</androidx.cardview.widget.CardView>
