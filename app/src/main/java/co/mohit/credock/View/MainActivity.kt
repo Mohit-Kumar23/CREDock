@@ -16,6 +16,7 @@ import com.google.android.material.navigation.NavigationBarView
 class MainActivity : AppCompatActivity() {
 
     private val userProfileFrag:Fragment = UserProfileFragment()
+    private val individualCredentialFrag = IndividualCredentialFragment()
     private lateinit var mainActivityBinder:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,13 +37,19 @@ class MainActivity : AppCompatActivity() {
         mainActivityBinder.bottomNavBarMainActivity.setOnItemSelectedListener{
             when(it.itemId)
             {
+                R.id.menuItem_newCredential -> {
+                    mainActivityBinder.bottomNavBarMainActivity.visibility = View.GONE
+                    supportActionBar?.hide()
+                    initializeFragment(individualCredentialFrag)
+                    true
+                }
+
                 R.id.menuItem_profile -> {
                     mainActivityBinder.bottomNavBarMainActivity.visibility = View.GONE
                     supportActionBar?.hide()
                     initializeFragment(userProfileFrag)
-
                     true
-                                            }
+                }
                 else -> false
             }
         }

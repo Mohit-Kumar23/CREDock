@@ -8,4 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CustomActivityTheme" parent="Theme.AppCompat.Light">
+        <item name="windowActionBar">true</item>
+        <item name="colorPrimary">@color/light_yellow</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="android:fontFamily">@font/koho_semibold</item>
+        <item name="android:title">@string/app_name</item>
+        <item name="actionBarSize">@dimen/_40sdp</item>
+    </style>
+
+    <style name="Widget.Theme.AppCompat.Light.NoActionBar.ButtonBar.Fullscreen" parent="">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+    </style>
+
 </resources>
