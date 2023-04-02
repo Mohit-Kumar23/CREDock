@@ -29,9 +29,9 @@
     <string name="save_text">Save</string>
     <string name="cancel_text">Cancel</string>
     <string name="hello_text">Hello,</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="platform_text">Platform</string>
+    <string name="hint_credentialTag">Tag Name for Credential</string>
+    <string name="type_your_credential_here_text">Type your credential here</string>
     <string-array name="gender_array">
         <item>Gender</item>
         <item>Male</item>

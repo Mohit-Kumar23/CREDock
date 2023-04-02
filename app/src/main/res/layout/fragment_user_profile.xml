@@ -349,7 +349,7 @@
           android:id="@+id/imgBtn_edit"
           android:layout_width="0dp"
           android:layout_height="0dp"
-          android:background="@color/white"
+          android:background="@drawable/custom_transparent_button"
           app:layout_constraintEnd_toEndOf="@id/vGuideLine5"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintStart_toStartOf="@id/vGuideLine4"
