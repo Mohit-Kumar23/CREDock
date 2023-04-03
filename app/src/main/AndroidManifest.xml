@@ -16,6 +16,7 @@
         <activity
             android:theme= "@style/CustomActivityTheme"
             android:name=".View.MainActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
