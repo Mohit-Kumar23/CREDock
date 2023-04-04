@@ -1,11 +1,13 @@
 package co.mohit.credock.View
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
@@ -28,6 +30,7 @@ class IndividualCredentialFragment : Fragment(),IUserIndividualCred {
     private lateinit var individualCredentialBinding:FragmentIndividualCredentialBinding
     private lateinit var credArrList:ArrayList<SingleCredentialViewModel>
     private lateinit var recyclerViewIndCred:RecyclerView
+    private lateinit var recyclerAdapterIndividualCred:RecyclerAdapterIndividualCred
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +59,9 @@ class IndividualCredentialFragment : Fragment(),IUserIndividualCred {
         super.onStart()
         recyclerViewIndCred = individualCredentialBinding.rcvIndividualCred
         recyclerViewIndCred.layoutManager = LinearLayoutManager(this.context,RecyclerView.VERTICAL,false)
+
+        val spinnerArrayAdapter:ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(this.requireContext(),R.array.platform_type,R.layout.custom_spinner_items)
+        individualCredentialBinding.spPlatformType.adapter = spinnerArrayAdapter
     }
 
     override fun onResume() {
@@ -63,7 +69,7 @@ class IndividualCredentialFragment : Fragment(),IUserIndividualCred {
         individualCredentialBinding.btnAddNewItem.setOnClickListener(View.OnClickListener {
             if(credArrList.size > 0)
             {
-                var prevCredRow = credArrList.get(credArrList.size-1)
+                var prevCredRow = credArrList[credArrList.size-1]
                 if(!prevCredRow.isCredentialEmpty())
                 {
                     addNewCredentialRowToArrayList()
@@ -75,15 +81,19 @@ class IndividualCredentialFragment : Fragment(),IUserIndividualCred {
             }
             else
             {
-                addNewCredentialRowToArrayList()
+                credArrList.add(SingleCredentialViewModel("",""))
+                individualCredentialBinding.btnSave.visibility = View.VISIBLE
+                individualCredentialBinding.btnCancel.visibility = View.VISIBLE
+                initializeRecyclerAdapter()
             }
         })
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun addNewCredentialRowToArrayList() {
         credArrList.add(SingleCredentialViewModel("",""))
-        val recyclerAdapterIndividualCred = RecyclerAdapterIndividualCred(this.requireContext(),this,credArrList)
-        individualCredentialBinding.rcvIndividualCred.adapter = recyclerAdapterIndividualCred
+        recyclerAdapterIndividualCred.notifyItemInserted(credArrList.size-1)
+        recyclerAdapterIndividualCred.notifyDataSetChanged()
     }
 
     companion object {
@@ -98,7 +108,8 @@ class IndividualCredentialFragment : Fragment(),IUserIndividualCred {
             }
     }
 
-    override fun appendCredArrayList(position: Int, credTagName: String?, credValue: String?,bRemove:Boolean) {
+    @SuppressLint("NotifyDataSetChanged")
+    override fun appendCredArrayList(position: Int, credTagName: String?, credValue: String?, bRemove:Boolean) {
         if(!bRemove) {
             credArrList[position].credentialTagName = credTagName!!
             credArrList[position].credentialValue = credValue!!
@@ -106,6 +117,20 @@ class IndividualCredentialFragment : Fragment(),IUserIndividualCred {
         else
         {
             credArrList.removeAt(position)
+            recyclerAdapterIndividualCred.notifyItemRemoved(position)
+            recyclerAdapterIndividualCred.notifyDataSetChanged()
+
+            if(credArrList.size == 0)
+            {
+                individualCredentialBinding.btnSave.visibility = View.GONE
+                individualCredentialBinding.btnCancel.visibility = View.GONE
+            }
         }
+    }
+
+    fun initializeRecyclerAdapter()
+    {
+        recyclerAdapterIndividualCred = RecyclerAdapterIndividualCred(this.requireContext(),this,credArrList)
+        individualCredentialBinding.rcvIndividualCred.adapter = recyclerAdapterIndividualCred
     }
 }

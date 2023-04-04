@@ -56,4 +56,13 @@
         <item>What is your favourite subject to study?</item>
         <item>What is name of your high school?</item>
     </string-array>
+    <string-array name="platform_type">
+        <item>Bank</item>
+        <item>Mail</item>
+        <item>Insurance</item>
+        <item>EPFO</item>
+        <item>Aadhar Card</item>
+        <item>Driving License</item>
+        <item>Other</item>
+    </string-array>
 </resources>
