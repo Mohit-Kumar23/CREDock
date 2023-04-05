@@ -1,27 +1,22 @@
 package co.mohit.credock.View
 
 import android.content.ContentValues
-import android.net.wifi.p2p.WifiP2pManager.UpnpServiceResponseListener
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import co.mohit.credock.*
 import co.mohit.credock.Controller.*
 import kotlinx.android.synthetic.main.activity_account_create.*
-import kotlinx.android.synthetic.main.activity_auth.*
-import kotlinx.android.synthetic.main.fragment_user_pin_setup.*
-import kotlinx.android.synthetic.main.fragment_user_profile_details.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class AccountCreateActivity : AppCompatActivity(),IUserDetailFragmentToActivity
 {
-    val userProfileFrag = UserProfileDetails()
-    val userPinFrag = UserPinSetup()
+    val userProfileFrag = UserProfileInputDetailsFragment()
+    val userPinFrag = UserPinSetupFragment()
     val fragmentMgr = supportFragmentManager
 
     //User Information Parameters

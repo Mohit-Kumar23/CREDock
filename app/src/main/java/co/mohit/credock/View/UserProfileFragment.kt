@@ -2,6 +2,7 @@ package co.mohit.credock.View
 
 import android.content.Context
 import android.os.Bundle
+import android.view.GestureDetector
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +20,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [UserProfileFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class UserProfileFragment : Fragment() {
+class UserProfileFragment : Fragment(){
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -39,6 +40,7 @@ class UserProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_user_profile, container, false)
     }
+
 
 /*    override fun onAttach(context: Context) {
         super.onAttach(context)

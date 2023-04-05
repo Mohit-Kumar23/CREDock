@@ -56,5 +56,18 @@
         app:layout_constraintTop_toTopOf="@+id/hGuieLine1"
         app:menu="@menu/bottom_navigation_items" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_expandNavigationBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:background="@drawable/custom_btn_design"
+        android:backgroundTint="@color/green"
+        android:src="@drawable/icon_expand_24"
+        app:layout_constraintBottom_toTopOf="@+id/hGuideLine2"
+        app:layout_constraintEnd_toEndOf="@id/vGuideLine1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/hGuieLine1" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

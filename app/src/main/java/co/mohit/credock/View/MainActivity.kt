@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private val userProfileFrag:Fragment = UserProfileFragment()
     private val individualCredentialFrag = IndividualCredentialFragment()
+    private val userCredentialFrag = UserCredentialsFragment()
     private lateinit var mainActivityBinder:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,28 +32,66 @@ class MainActivity : AppCompatActivity() {
         fragTrans.commit()
     }
 
+    override fun onStart() {
+        super.onStart()
+        initializeFragment(userCredentialFrag)
+        mainActivityBinder.fabExpandNavigationBar.visibility = View.GONE
+    }
+
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onResume() {
         super.onResume()
-        mainActivityBinder.bottomNavBarMainActivity.setOnItemSelectedListener{
+        mainActivityBinder.bottomNavBarMainActivity.setOnItemSelectedListener{it->
             when(it.itemId)
             {
                 R.id.menuItem_newCredential -> {
-                    mainActivityBinder.bottomNavBarMainActivity.visibility = View.GONE
-                    supportActionBar?.hide()
-                    initializeFragment(individualCredentialFrag)
+                    if(!this.supportFragmentManager.fragments.equals(individualCredentialFrag)) {
+                        mainActivityBinder.bottomNavBarMainActivity.visibility = View.GONE
+                        supportActionBar?.hide()
+                        mainActivityBinder.fabExpandNavigationBar.visibility = View.VISIBLE
+                        initializeFragment(individualCredentialFrag)
+                    }
+                    else
+                    {
+                        supportActionBar?.hide()
+                        mainActivityBinder.fabExpandNavigationBar.visibility = View.VISIBLE
+                    }
                     true
                 }
 
                 R.id.menuItem_profile -> {
-                    mainActivityBinder.bottomNavBarMainActivity.visibility = View.GONE
-                    supportActionBar?.hide()
-                    initializeFragment(userProfileFrag)
+                    if(!this.supportFragmentManager.fragments.equals(userProfileFrag)) {
+                        mainActivityBinder.bottomNavBarMainActivity.visibility = View.GONE
+                        supportActionBar?.hide()
+                        mainActivityBinder.fabExpandNavigationBar.visibility = View.VISIBLE
+                        initializeFragment(userProfileFrag)
+                    }
+                    else
+                    {
+                        supportActionBar?.hide()
+                        mainActivityBinder.fabExpandNavigationBar.visibility = View.VISIBLE
+                    }
+                    true
+                }
+
+                R.id.menuItem_credential -> {
+                    if(!this.supportFragmentManager.fragments.equals(UserCredentialsFragment))
+                    {
+                        mainActivityBinder.bottomNavBarMainActivity.visibility = View.VISIBLE
+                        supportActionBar?.show()
+                        mainActivityBinder.fabExpandNavigationBar.visibility = View.GONE
+                        initializeFragment(userCredentialFrag)
+                    }
                     true
                 }
                 else -> false
             }
         }
+
+        mainActivityBinder.fabExpandNavigationBar.setOnClickListener(View.OnClickListener {
+            mainActivityBinder.bottomNavBarMainActivity.visibility =View.VISIBLE
+            mainActivityBinder.fabExpandNavigationBar.visibility = View.GONE
+        })
 
 
     }

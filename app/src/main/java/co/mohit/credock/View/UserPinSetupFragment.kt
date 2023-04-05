@@ -3,20 +3,15 @@ package co.mohit.credock.View
 import android.content.ContentValues
 import android.content.Context
 import android.os.Bundle
-import android.os.TestLooperManager
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnKeyListener
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.Toast
 import co.mohit.credock.CD_Global_enums
 import co.mohit.credock.Controller.EmailVerificationService
-import co.mohit.credock.R
 import co.mohit.credock.databinding.FragmentUserPinSetupBinding
 import kotlinx.android.synthetic.main.fragment_user_pin_setup.*
 
@@ -24,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_user_pin_setup.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class UserPinSetup : Fragment() {
+class UserPinSetupFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -197,7 +192,7 @@ class UserPinSetup : Fragment() {
 
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            UserPinSetup().apply {
+            UserPinSetupFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

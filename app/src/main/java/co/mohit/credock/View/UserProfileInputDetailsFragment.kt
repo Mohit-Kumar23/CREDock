@@ -11,23 +11,19 @@ import android.widget.Toast
 import co.mohit.credock.CD_UserDesignation_enum
 import co.mohit.credock.CD_UserGender_enum
 import co.mohit.credock.CD_UserSecurityQue_enum
-import co.mohit.credock.Controller.EmailVerificationService
-import co.mohit.credock.R
-import co.mohit.credock.View.IUserDetailFragmentToActivity
-import co.mohit.credock.databinding.FragmentUserProfileDetailsBinding
+import co.mohit.credock.databinding.FragmentUserProfileInputDetailsBinding
 import kotlinx.android.synthetic.main.activity_account_create.*
-import kotlinx.android.synthetic.main.fragment_user_profile_details.*
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-class UserProfileDetails : Fragment() {
+class UserProfileInputDetailsFragment : Fragment() {
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
     private lateinit var userProfileCallback:IUserDetailFragmentToActivity
-    private lateinit var userDetailsBinder: FragmentUserProfileDetailsBinding
+    private lateinit var userDetailsBinder: FragmentUserProfileInputDetailsBinding
     private var userProfileContentValue:ContentValues = ContentValues()
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -48,19 +44,21 @@ class UserProfileDetails : Fragment() {
         }
     }
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        userDetailsBinder = FragmentUserProfileDetailsBinding.inflate(inflater, container, false)
+        userDetailsBinder = FragmentUserProfileInputDetailsBinding.inflate(inflater, container, false)
         return userDetailsBinder.root
     }
 
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            UserProfileDetails().apply {
+            UserProfileInputDetailsFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

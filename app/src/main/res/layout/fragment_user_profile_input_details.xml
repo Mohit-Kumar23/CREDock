@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/fragment_userProfileDetails"
-    tools:context=".View.UserProfileDetails">
+    tools:context=".View.UserProfileInputDetailsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
@@ -39,6 +39,7 @@
             android:layout_marginEnd="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_15sdp"
             android:hint="@string/userEmail"
+            android:singleLine="true"
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:background="@drawable/custom_input_view"
@@ -115,6 +116,7 @@
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginEnd="@dimen/_15sdp"
             android:padding="@dimen/_10sdp"
+            android:singleLine="true"
             android:layout_marginTop="@dimen/_15sdp"
             android:background="@drawable/custom_input_view"
             android:hint="@string/user_security_answer"
