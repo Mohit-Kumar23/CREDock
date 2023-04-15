@@ -6,14 +6,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".View.UserProfileFragment">
 
-   <!--<ScrollView
+   <ScrollView
        android:layout_width="match_parent"
-       android:layout_height="wrap_content">-->
+       android:layout_height="match_parent">
 
    <androidx.constraintlayout.widget.ConstraintLayout
        android:id="@+id/constLayout_userProfile"
        android:layout_width="match_parent"
-       android:layout_height="match_parent"
+       android:layout_height="wrap_content"
        tools:ignore="InvalidId">
 
       <androidx.constraintlayout.widget.Guideline
@@ -232,7 +232,7 @@
           app:layout_constraintStart_toStartOf="@id/vGuideLine2"
           app:layout_constraintEnd_toEndOf="@id/vGuideLine5"
           android:layout_marginTop="@dimen/_20sdp"
-          android:text="MK_6862"
+          android:text="MK_4032"
           android:gravity="left"
           android:paddingStart="@dimen/_5sdp"
           android:textColor="@color/black"
@@ -246,6 +246,7 @@
           android:paddingStart="@dimen/_5sdp"
           android:text="kvnl.mohitchanchlani@gmail.com"
           android:textColor="@color/black"
+          android:inputType="textEmailAddress"
           android:textSize="@dimen/_11ssp"
           app:layout_constraintBottom_toBottomOf="@id/tv_userEmail"
           app:layout_constraintEnd_toStartOf="@id/vGuideLine5"
@@ -269,12 +270,13 @@
           tools:ignore="RtlSymmetry" />
 
       <EditText
-          android:id="@+id/sp_userAge"
+          android:id="@+id/et_userAge"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:enabled="false"
           android:paddingStart="@dimen/_5sdp"
           android:text="22 Yrs"
+          android:inputType="number"
           android:textColor="@color/black"
           android:textSize="@dimen/_11ssp"
           app:layout_constraintBottom_toBottomOf="@+id/tv_userAge"
@@ -322,6 +324,7 @@
           android:enabled="false"
           android:paddingStart="@dimen/_5sdp"
           android:text="akash"
+          android:inputType="text"
           android:textColor="@color/black"
           android:textSize="@dimen/_11ssp"
           app:layout_constraintBottom_toBottomOf="@+id/tv_userSecurityAns"
@@ -363,6 +366,7 @@
           android:layout_height="wrap_content"
           android:background="@drawable/custom_btn_design"
           android:text="@string/save_text"
+          android:visibility="invisible"
           android:layout_marginTop="@dimen/_10sdp"
           app:layout_constraintTop_toBottomOf="@id/et_userPin"
           app:layout_constraintEnd_toStartOf="@id/vGuideLine5"/>
@@ -373,6 +377,7 @@
           android:layout_height="wrap_content"
           android:text="@string/cancel_text"
           android:textSize="@dimen/_10ssp"
+          android:visibility="invisible"
           android:layout_marginTop="@dimen/_10sdp"
           android:layout_marginEnd="@dimen/_10sdp"
           android:textColor="@color/black"
@@ -382,5 +387,5 @@
 
    </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--   </ScrollView>-->
+   </ScrollView>
 </FrameLayout>

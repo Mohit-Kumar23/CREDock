@@ -9,6 +9,6 @@ interface ISQLOperation {
     var dbHelper:DatabaseHelper?
 
     fun addRecord(obj: ContentValues):Int?
-    fun updateRecord(strVal:String,obj: Objects):Int
-    fun deleteRecord(strVal:String):Int
+    fun updateRecord(strVal:String,obj: ContentValues):Int?
+    fun deleteRecord(strVal:String):Int?
 }

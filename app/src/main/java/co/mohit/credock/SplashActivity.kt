@@ -13,7 +13,6 @@ import co.mohit.credock.View.AuthActivity
 class SplashActivity : AppCompatActivity() {
 
     private var sharedPreferences:SharedPreferences? = null
-    private lateinit var dbService:DatabaseService;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -43,32 +42,28 @@ class SplashActivity : AppCompatActivity() {
             }
             else
             {
-                dbService = DatabaseService()
+                DatabaseService.createDBService(this)
             }
         }
         catch(ex:Exception)
         {
             Log.e("DB Exception",ex.message.toString())
-            if(dbService != null)
-            {
-                dbService.closeConnectionFromDB()
-            }
+            DatabaseService.closeConnectionFromDB()
+
         }
         var mHandleDelay = Handler(Looper.getMainLooper())
         mHandleDelay.postDelayed({
             var intent: Intent = Intent(this@SplashActivity, AuthActivity::class.java);
-            //intent.putExtra("DBHelperInstance",dbService)
             startActivity(intent);
         },2000);
     }
 
     fun callToCreateDatabaseAndTables()
     {
-        dbService = DatabaseService()
-        dbService.createDBService(this)
-        dbService.closeConnectionFromDB()
+        DatabaseService.createDBService(this)
+        DatabaseService.closeConnectionFromDB()
         var sharedPrefEditor = sharedPreferences?.edit()
-        if(dbService.isDBCreated)
+        if(DatabaseService.isDBCreated)
         {
             sharedPrefEditor?.putInt("DBCreated",1)
         }

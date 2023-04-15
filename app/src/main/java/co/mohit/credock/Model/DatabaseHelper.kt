@@ -2,10 +2,12 @@ package co.mohit.credock.Model
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import co.mohit.credock.CD_Database_enums
 import co.mohit.credock.CD_Table_Operation
+import co.mohit.credock.CD_UserTable_Column
 import java.io.File
 import java.util.Objects
 import kotlin.properties.Delegates
@@ -17,6 +19,8 @@ private const val USER_CREDENTIAL_TB = "UserCredentialTable"
 private const val CREDENTIAL_TYPE_TB = "CredentialTypeTable"
 
 class DatabaseHelper:SQLiteOpenHelper {
+
+    private lateinit var tbName:String
 
     constructor(context: Context?) : super(context, CREDOCK_DB, null, DB_VERSION)
     {
@@ -55,10 +59,6 @@ class DatabaseHelper:SQLiteOpenHelper {
             Platform NVARCHAR(20) NOT NULL,
             Data BLOB NOT NULL,
             NumberOfTags SMALLINT NOT NULL,
-            SecurityQueID SMALLINT,
-            SecurityQueText NVARCHAR(50),
-            SecurityAns NVARCHAR(100),
-            MobileNo BIGINT,
             LastModifiedOn DATETIME NOT NULL,
             CreatedOn DATETIME NOT NULL,
             FOREIGN KEY(AccountNo) REFERENCES ${USER_DETAIL_TB} (AccountNo),
@@ -74,18 +74,20 @@ class DatabaseHelper:SQLiteOpenHelper {
 
     fun addRecord(token:Int,obj:ContentValues):Int
     {
-        val tb_name = determineTableName(token)
+        determineTableName(token)
         val db = this.writableDatabase
 
-        val result = db.insert(tb_name,null, obj as ContentValues)
+        val result = db.insert(tbName,null, obj as ContentValues)
 
         return result.toInt()
     }
 
-    fun updateRecord(token:Int):Int
+    fun updateRecord(token:Int,obj: ContentValues,whereClause:String,whereClauseValues:Array<String>):Int
     {
-        var tb_name = determineTableName(token)
-        return CD_Table_Operation.TB_OPERATION_SUCCESS.value.toInt()
+        determineTableName(token)
+        val db = this.writableDatabase
+        return db.update(tbName,obj,whereClause,whereClauseValues)
+
     }
 
     fun deleteRecord(token: Int):Int
@@ -94,16 +96,15 @@ class DatabaseHelper:SQLiteOpenHelper {
         return CD_Table_Operation.TB_OPERATION_SUCCESS.value.toInt()
     }
 
-    fun determineTableName(token:Int):String
+    fun determineTableName(token:Int):Unit
     {
-        var tb_name:String = "";
-        when(token)
+        tbName = when(token)
         {
-            CD_Database_enums.TB_USER_DETAILS.value.toInt() -> tb_name = USER_DETAIL_TB;
-            CD_Database_enums.TB_USER_CREDENTIALS.value.toInt() -> tb_name = USER_CREDENTIAL_TB;
-            CD_Database_enums.TB_CREDENTIAL_TYPE.value.toInt() -> tb_name = CREDENTIAL_TYPE_TB;
+            CD_Database_enums.TB_USER_DETAILS.value.toInt() -> USER_DETAIL_TB;
+            CD_Database_enums.TB_USER_CREDENTIALS.value.toInt() ->USER_CREDENTIAL_TB;
+            CD_Database_enums.TB_CREDENTIAL_TYPE.value.toInt() -> CREDENTIAL_TYPE_TB;
+            else -> {"Not Applicable"}
         }
-        return tb_name
     }
 
     fun isDatabaseAlreadyExist():Boolean
@@ -111,5 +112,17 @@ class DatabaseHelper:SQLiteOpenHelper {
         var dbFilePath = "/data/data/co.mohit.credock/databases/${CREDOCK_DB}"
         var file = File(dbFilePath)
         return file.exists()
+    }
+
+    fun fetchUserId(userPin:Int):String?
+    {
+        var retVal:String? = null
+        val db = this.readableDatabase
+        val cursor:Cursor = db.rawQuery("SELECT ${CD_UserTable_Column.ColAccNo.colName} FROM ${USER_DETAIL_TB} WHERE ${CD_UserTable_Column.ColSecPin.colName} = '${userPin.toString()}'",null)
+        while(cursor.moveToNext())
+        {
+            retVal = cursor.getString(0)
+        }
+        return retVal
     }
 }

@@ -8,11 +8,13 @@ import co.mohit.credock.Model.UserDetailModel
 import co.mohit.credock.Model.UserDetailTbOps
 import java.util.Objects
 
-class DatabaseService:java.io.Serializable{
+object DatabaseService:java.io.Serializable{
 
     private lateinit var dbHelper:DatabaseHelper;
     public var isDBCreated = false
-   fun createDBService(context:Context)
+    var loggedInUserID:String? = null
+
+   fun createDBService(context: Context)
     {
         dbHelper = DatabaseHelper(context)
         if(!(dbHelper.isDatabaseAlreadyExist()))
@@ -32,14 +34,27 @@ class DatabaseService:java.io.Serializable{
         return UserDetailTbOps(context).addRecordToDB(userDetails.getUserDetailModelInstance())
     }
 
-    fun updateUserInfoToCDUserTableService()
+    fun updateUserInfoToCDUserTableService(context:Context,userID:String,userDetails:UserDetailsController):Int?
     {
-
+        return UserDetailTbOps(context).updateRecordToDB(userID,userDetails.getUserDetailModelInstance())
     }
 
-    fun deleteUserFromCDUserTableService()
+    fun deleteUserFromCDUserTableService(context:Context,userID:String):Int?
     {
+        return UserDetailTbOps(context).deleteRecord(userID)
+    }
 
+    fun fetchUserIDFromDB(userPin: Int):Int
+    {
+        loggedInUserID = dbHelper.fetchUserId(userPin);
+        if(!loggedInUserID.isNullOrEmpty())
+        {
+            return 1
+        }
+        else
+        {
+            return 0
+        }
     }
 
     fun closeConnectionFromDB()

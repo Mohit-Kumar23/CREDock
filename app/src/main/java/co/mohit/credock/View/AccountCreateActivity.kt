@@ -32,7 +32,6 @@ class AccountCreateActivity : AppCompatActivity(),IUserDetailFragmentToActivity
     private var str_reEnteredPin: String? = null
     private var str_otpVerify: String? = null
     lateinit var emailVerifyService:EmailVerificationService;
-    private lateinit var dbService:DatabaseService;
 
     init {
         System.loadLibrary("api_keys")
@@ -52,8 +51,7 @@ class AccountCreateActivity : AppCompatActivity(),IUserDetailFragmentToActivity
 
         initializeFragments(userProfileFrag)
         //dbService = intent.extras?.get("DBHelperInstance") as DatabaseService
-        dbService = DatabaseService()
-        dbService.createDBService(this@AccountCreateActivity)
+/*        dbService.createDBService(this@AccountCreateActivity)*/
 
     }
 
@@ -103,15 +101,15 @@ class AccountCreateActivity : AppCompatActivity(),IUserDetailFragmentToActivity
         cUserDetial.createdOnTimeStamp = currentDateTime.format(dateTimeFormatter)
 
         cUserDetial.prepareUserID(str_otpVerify!!.toInt())
-        if(dbService == null)
+/*        if(dbService == null)
         {
             dbService = DatabaseService()
             if(!dbService.isDBCreated)
             {
                 dbService.createDBService(this@AccountCreateActivity)
             }
-        }
-        var result = dbService.insertUserToCDUserTableService(this,cUserDetial)
+        }*/
+        var result = DatabaseService.insertUserToCDUserTableService(this,cUserDetial)
         if(result != null)
         {
             if(result != -1)
