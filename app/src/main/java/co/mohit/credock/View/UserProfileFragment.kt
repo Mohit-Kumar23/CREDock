@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import co.mohit.credock.CD_Global_enums
 import co.mohit.credock.CD_UserDesignation_enum
 import co.mohit.credock.CD_UserSecurityQue_enum
@@ -47,23 +48,29 @@ class UserProfileFragment : Fragment(){
         return userProfileBinding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        userProfileBinding.spUserDesignation.isEnabled = false
+        userProfileBinding.spUserSecurityQue.isEnabled = false
+    }
+
     override fun onResume() {
         super.onResume()
 
         userProfileBinding.imgBtnEdit.setOnClickListener(View.OnClickListener {
             enableRequiredControls()
-            userProfileBinding.imgBtnEdit.isEnabled = false
+            userProfileBinding.imgBtnEdit.visibility = View.INVISIBLE
         })
 
         userProfileBinding.btnSaveBtn.setOnClickListener(View.OnClickListener {
             disableRequiredControls()
             processForStoringUpdatedValuesToDB()
-            userProfileBinding.imgBtnEdit.isEnabled = true
+            userProfileBinding.imgBtnEdit.visibility = View.VISIBLE
         })
 
         userProfileBinding.btnCancelBtn.setOnClickListener(View.OnClickListener {
             disableRequiredControls()
-            userProfileBinding.imgBtnEdit.isEnabled = true
+            userProfileBinding.imgBtnEdit.visibility = View.VISIBLE
         })
     }
 
@@ -72,9 +79,8 @@ class UserProfileFragment : Fragment(){
 
         var updateUserDetails = UserDetailsController()
 
-        var str_userAge = userProfileBinding.etUserAge.text.toString()
         updateUserDetails.userEmail = userProfileBinding.etUserEmail.text.trim().toString()
-        updateUserDetails.userAge = str_userAge.substring(0,str_userAge.indexOf("Yrs")).trim().toInt();
+        updateUserDetails.userAge = userProfileBinding.etUserAge.text.toString().toInt();
         updateUserDetails.userDesignation = when(userProfileBinding.spUserDesignation.selectedItemPosition)
         {
             1 -> CD_UserDesignation_enum.STUDENT.value.toInt()
@@ -105,28 +111,43 @@ class UserProfileFragment : Fragment(){
         val dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy/HH:mm:ss")
         updateUserDetails.lastModifiedOnTimeStamp = currentDateTime.format(dateTimeFormatter)
 
-        DatabaseService.updateUserInfoToCDUserTableService(this.requireContext(),DatabaseService.loggedInUserID!!.toString(),updateUserDetails)
+        var retVal = DatabaseService.updateUserInfoToCDUserTableService(this.requireContext(),DatabaseService.loggedInUserID!!.toString(),updateUserDetails)
+        if(retVal == 1)
+        {
+            Toast.makeText(this.requireContext(),"Update Successfully",Toast.LENGTH_SHORT).show()
+        }
+        else
+        {
+            Toast.makeText(this.requireContext(),"Failed to Update Successfully",Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun enableRequiredControls() {
         userProfileBinding.btnSaveBtn.visibility = View.VISIBLE
         userProfileBinding.btnCancelBtn.visibility = View.VISIBLE
         userProfileBinding.etUserEmail.isEnabled = true
+        userProfileBinding.etUserEmail.setTextColor(R.color.black)
         userProfileBinding.etUserAge.isEnabled = true
+        userProfileBinding.etUserAge.setTextColor(R.color.black)
+        userProfileBinding.spUserDesignation.isClickable = true
         userProfileBinding.spUserDesignation.isEnabled = true
+        userProfileBinding.spUserSecurityQue.isClickable = true
         userProfileBinding.spUserSecurityQue.isEnabled = true
         userProfileBinding.etUserSecurityAns.isEnabled = true
+        userProfileBinding.etUserSecurityAns.setTextColor(R.color.black)
     }
 
 
     private fun disableRequiredControls() {
         userProfileBinding.btnSaveBtn.visibility = View.INVISIBLE
         userProfileBinding.btnCancelBtn.visibility = View.INVISIBLE
-        userProfileBinding.etUserEmail.isEnabled = false
-        userProfileBinding.etUserAge.isEnabled = false
+        userProfileBinding.etUserEmail.isEnabled = false; userProfileBinding.etUserEmail.setTextColor(R.color.grey)
+        userProfileBinding.etUserAge.isEnabled = false; userProfileBinding.etUserAge.setTextColor(R.color.grey)
         userProfileBinding.spUserDesignation.isEnabled = false
         userProfileBinding.spUserSecurityQue.isEnabled = false
-        userProfileBinding.etUserSecurityAns.isEnabled = false
+        userProfileBinding.spUserDesignation.isClickable = false
+        userProfileBinding.spUserSecurityQue.isClickable = false
+        userProfileBinding.etUserSecurityAns.isEnabled = false; userProfileBinding.etUserSecurityAns.setTextColor(R.color.grey)
     }
 
     companion object {

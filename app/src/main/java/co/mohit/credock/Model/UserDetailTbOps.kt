@@ -12,7 +12,7 @@ class UserDetailTbOps:ISQLOperation {
 
     override val tableToWorkOn: Int = CD_Database_enums.TB_USER_DETAILS.value.toInt()
     override var dbHelper: DatabaseHelper? = null
-    private val whereClause:String = CD_UserTable_Column.ColAccNo.toString() + " = ?"
+    private val whereClause:String = CD_UserTable_Column.ColAccNo.colName.toString() + " = ?"
 
     constructor(context: Context)
     {
